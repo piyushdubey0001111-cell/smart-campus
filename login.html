@@ -1,0 +1,643 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login | Smart Campus</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1e3a8a,
+                    #2563eb,
+                    #60a5fa
+                );
+
+            overflow: hidden;
+        }
+
+        /* ================= BACKGROUND CIRCLES ================= */
+
+        .circle {
+            position: fixed;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.10);
+
+            z-index: 0;
+        }
+
+        .circle.one {
+            width: 350px;
+            height: 350px;
+
+            top: -160px;
+            left: -100px;
+        }
+
+        .circle.two {
+            width: 420px;
+            height: 420px;
+
+            bottom: -220px;
+            right: -130px;
+        }
+
+        /* ================= LOGIN CARD ================= */
+
+        .login-card {
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: rgba(255,255,255,0.97);
+
+            padding: 40px 35px;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 70px rgba(15,23,42,0.30);
+
+            text-align: center;
+        }
+
+        .logo {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #bfdbfe
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+
+            box-shadow:
+                0 8px 20px rgba(37,99,235,0.15);
+        }
+
+        .login-card h1 {
+            color: #1e3a8a;
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+        }
+
+        .subtitle {
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            text-align: left;
+
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 17px;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            border: 1px solid #dbe3ef;
+
+            outline: none;
+
+            border-radius: 10px;
+
+            padding: 14px 15px 14px 45px;
+
+            font-size: 14px;
+
+            color: #334155;
+
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.10);
+        }
+
+        /* ================= PASSWORD ================= */
+
+        .password-toggle {
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin: 5px 0 23px;
+
+            font-size: 12px;
+        }
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #64748b;
+        }
+
+        .forgot {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1e3a8a,
+                    #2563eb
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 18px rgba(37,99,235,0.25);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(37,99,235,0.30);
+        }
+
+        /* ================= DEMO INFO ================= */
+
+        .demo {
+            margin-top: 22px;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            background: #eff6ff;
+
+            color: #1e40af;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= HOME ================= */
+
+        .home-link {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .home-link:hover {
+            color: #2563eb;
+        }
+
+        /* ================= MESSAGE ================= */
+
+        #message {
+            margin-top: 15px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 32px 23px;
+            }
+
+            .login-card h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Background -->
+
+    <div class="circle one"></div>
+
+    <div class="circle two"></div>
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <div class="login-card">
+
+
+        <div class="logo">
+            🎓
+        </div>
+
+
+        <h1>
+            Student Login
+        </h1>
+
+
+        <p class="subtitle">
+            Welcome back to Smart Campus
+        </p>
+
+
+        <form onsubmit="loginStudent(event)">
+
+
+            <!-- Student ID -->
+
+            <div class="form-group">
+
+                <label>
+                    Student ID
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="studentId"
+                        placeholder="Enter your student ID"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword()"
+                        id="toggleBtn"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    Remember me
+
+                </label>
+
+
+                <a href="#"
+                   class="forgot"
+                   onclick="forgotPassword(); return false;">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+
+                Login to Dashboard →
+
+            </button>
+
+
+            <div id="message"></div>
+
+
+        </form>
+
+
+        <!-- DEMO -->
+
+        <div class="demo">
+
+            <strong>
+                Demo Login
+            </strong>
+
+            <br>
+
+            Student ID:
+            <b>student123</b>
+
+            <br>
+
+            Password:
+            <b>123456</b>
+
+        </div>
+
+
+        <!-- HOME -->
+
+        <a href="index.html"
+           class="home-link">
+
+            ← Back to Smart Campus
+
+        </a>
+
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+
+        function loginStudent(event) {
+
+            event.preventDefault();
+
+
+            const studentId =
+                document
+                .getElementById("studentId")
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById("password")
+                .value;
+
+
+            const message =
+                document
+                .getElementById("message");
+
+
+            if (
+                studentId === "student123" &&
+                password === "123456"
+            ) {
+
+                message.style.color = "#15803d";
+
+                message.innerText =
+                    "✓ Login successful! Opening dashboard...";
+
+
+                localStorage.setItem(
+                    "studentLoggedIn",
+                    "true"
+                );
+
+
+                localStorage.setItem(
+                    "studentId",
+                    studentId
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }, 900);
+
+            }
+
+            else {
+
+                message.style.color = "#dc2626";
+
+                message.innerText =
+                    "✕ Invalid Student ID or Password.";
+
+            }
+
+        }
+
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.getElementById("toggleBtn");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.innerText = "🙈";
+
+            }
+
+            else {
+
+                password.type = "password";
+
+                button.innerText = "👁️";
+
+            }
+
+        }
+
+
+        function forgotPassword() {
+
+            alert(
+                "For this demo project, please contact the college administration to reset your password."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
+```
