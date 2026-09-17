@@ -34,9 +34,20 @@ margin:auto;
 padding:40px 20px;
 }
 
+.back-btn{
+display:inline-block;
+padding:12px 20px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:12px;
+font-weight:600;
+margin-bottom:25px;
+}
+
 .header{
 text-align:center;
-margin-bottom:40px;
+margin-bottom:35px;
 }
 
 .header h1{
@@ -52,7 +63,7 @@ margin-top:10px;
 .glass{
 background:rgba(255,255,255,.08);
 backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.12);
+border:1px solid rgba(255,255,255,.15);
 border-radius:25px;
 padding:25px;
 overflow-x:auto;
@@ -61,13 +72,13 @@ overflow-x:auto;
 table{
 width:100%;
 border-collapse:collapse;
-min-width:900px;
+min-width:1000px;
 }
 
 th{
 background:rgba(255,255,255,.12);
 padding:18px;
-font-size:16px;
+font-size:15px;
 }
 
 td{
@@ -76,10 +87,11 @@ text-align:center;
 border-top:1px solid rgba(255,255,255,.1);
 }
 
-.subject{
-background:rgba(255,255,255,.07);
-border-radius:12px;
-padding:10px;
+td small{
+display:block;
+margin-top:5px;
+color:#93c5fd;
+font-size:12px;
 }
 
 .break{
@@ -89,30 +101,19 @@ font-weight:bold;
 border-radius:10px;
 }
 
-.back-btn{
-display:inline-block;
-margin-bottom:25px;
-padding:12px 20px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:12px;
-font-weight:600;
-}
-
 </style>
 </head>
 <body>
 
 <div class="container">
 
-<a href="dashboard.html" class="back-btn">
+<a href="index.html" class="back-btn">
 ← Back to Dashboard
 </a>
 
 <div class="header">
-<h1>📅 Class Timetable</h1>
-<p>Smart Campus Weekly Schedule</p>
+<h1>📅 Weekly Timetable</h1>
+<p>MUIT Noida Smart Campus Schedule</p>
 </div>
 
 <div class="glass">
@@ -121,68 +122,65 @@ font-weight:600;
 
 <tr>
 <th>Day</th>
-<th>09:00</th>
-<th>10:00</th>
-<th>11:00</th>
-<th>12:00</th>
-<th>01:00</th>
-<th>02:00</th>
-<th>03:00</th>
+<th>9:00 - 10:00</th>
+<th>10:00 - 11:00</th>
+<th>11:00 - 12:00</th>
+<th>12:00 - 1:00</th>
+<th>2:00 - 3:00</th>
 </tr>
 
 <tr>
-<td>Monday</td>
-<td><div class="subject">Data Structures</div></td>
-<td><div class="subject">DBMS</div></td>
-<td><div class="subject">OS</div></td>
+<td><b>Monday</b></td>
+<td>Mathematics<small>Dr. Sharma</small></td>
+<td>Programming<small>Mr. Verma</small></td>
+<td>DBMS<small>Ms. Gupta</small></td>
 <td class="break">BREAK</td>
-<td><div class="subject">Web Dev</div></td>
-<td><div class="subject">Maths</div></td>
-<td><div class="subject">Lab</div></td>
+<td>Web Development<small>Mr. Singh</small></td>
 </tr>
 
 <tr>
-<td>Tuesday</td>
-<td><div class="subject">Java</div></td>
-<td><div class="subject">DBMS</div></td>
-<td><div class="subject">Maths</div></td>
+<td><b>Tuesday</b></td>
+<td>Programming<small>Mr. Verma</small></td>
+<td>Mathematics<small>Dr. Sharma</small></td>
+<td>Operating System<small>Mr. Khan</small></td>
 <td class="break">BREAK</td>
-<td><div class="subject">Web Dev</div></td>
-<td><div class="subject">Lab</div></td>
-<td><div class="subject">Lab</div></td>
+<td>DBMS Lab<small>Ms. Gupta</small></td>
 </tr>
 
 <tr>
-<td>Wednesday</td>
-<td><div class="subject">OS</div></td>
-<td><div class="subject">Java</div></td>
-<td><div class="subject">DBMS</div></td>
+<td><b>Wednesday</b></td>
+<td>Web Development<small>Mr. Singh</small></td>
+<td>Programming Lab<small>Mr. Verma</small></td>
+<td>Mathematics<small>Dr. Sharma</small></td>
 <td class="break">BREAK</td>
-<td><div class="subject">Maths</div></td>
-<td><div class="subject">Web Dev</div></td>
-<td><div class="subject">Project</div></td>
+<td>Communication Skills<small>Ms. Roy</small></td>
 </tr>
 
 <tr>
-<td>Thursday</td>
-<td><div class="subject">DSA</div></td>
-<td><div class="subject">OS</div></td>
-<td><div class="subject">Java</div></td>
+<td><b>Thursday</b></td>
+<td>DBMS<small>Ms. Gupta</small></td>
+<td>Operating System<small>Mr. Khan</small></td>
+<td>Programming<small>Mr. Verma</small></td>
 <td class="break">BREAK</td>
-<td><div class="subject">DBMS</div></td>
-<td><div class="subject">Lab</div></td>
-<td><div class="subject">Lab</div></td>
+<td>Web Development<small>Mr. Singh</small></td>
 </tr>
 
 <tr>
-<td>Friday</td>
-<td><div class="subject">Maths</div></td>
-<td><div class="subject">Web Dev</div></td>
-<td><div class="subject">DSA</div></td>
+<td><b>Friday</b></td>
+<td>Mathematics<small>Dr. Sharma</small></td>
+<td>DBMS Lab<small>Ms. Gupta</small></td>
+<td>Programming Lab<small>Mr. Verma</small></td>
 <td class="break">BREAK</td>
-<td><div class="subject">Project</div></td>
-<td><div class="subject">Seminar</div></td>
-<td><div class="subject">Sports</div></td>
+<td>Project Work<small>Faculty Team</small></td>
+</tr>
+
+<tr>
+<td><b>Saturday</b></td>
+<td>Seminar<small>Guest Faculty</small></td>
+<td>Workshop<small>Industry Expert</small></td>
+<td>Library<small>Self Study</small></td>
+<td class="break">BREAK</td>
+<td>Sports Activity<small>Sports Coach</small></td>
 </tr>
 
 </table>
