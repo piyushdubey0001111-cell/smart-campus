@@ -1,1985 +1,336 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Events | Smart Campus</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background:
-                radial-gradient(circle at top left, #dbeafe, transparent 30%),
-                radial-gradient(circle at bottom right, #e0e7ff, transparent 30%),
-                #f8fafc;
-            color: #1e293b;
-            min-height: 100vh;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        nav {
-            background: rgba(255,255,255,0.93);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-
-            padding: 15px 6%;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            border-bottom: 1px solid rgba(148,163,184,0.15);
-
-            box-shadow:
-                0 5px 25px rgba(15,23,42,0.07);
-        }
-
-        .logo {
-            color: #1e3a8a;
-            font-size: 21px;
-            font-weight: 800;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 7px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #475569;
-            font-size: 13px;
-            font-weight: 650;
-
-            padding: 8px 11px;
-
-            border-radius: 8px;
-
-            transition: 0.25s;
-        }
-
-        .nav-links a:hover {
-            color: #2563eb;
-            background: #eff6ff;
-        }
-
-        .nav-links a.active {
-            color: #2563eb;
-            background: #dbeafe;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            position: relative;
-            overflow: hidden;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #172554,
-                    #1d4ed8,
-                    #3b82f6
-                );
-
-            color: white;
-
-            text-align: center;
-
-            padding: 65px 20px 78px;
-
-            box-shadow:
-                0 15px 35px rgba(37,99,235,0.20);
-        }
-
-        .hero::before {
-            content: "";
-
-            position: absolute;
-
-            width: 330px;
-            height: 330px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255,255,255,0.08);
-
-            top: -190px;
-            left: -80px;
-        }
-
-        .hero::after {
-            content: "";
-
-            position: absolute;
-
-            width: 400px;
-            height: 400px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255,255,255,0.07);
-
-            bottom: -280px;
-            right: -110px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-icon {
-            width: 84px;
-            height: 84px;
-
-            margin: 0 auto 18px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 25px;
-
-            background:
-                rgba(255,255,255,0.15);
-
-            border:
-                1px solid rgba(255,255,255,0.25);
-
-            backdrop-filter: blur(10px);
-
-            font-size: 43px;
-
-            box-shadow:
-                0 12px 35px rgba(0,0,0,0.12);
-        }
-
-        .hero h1 {
-            font-size: 43px;
-
-            margin-bottom: 10px;
-
-            letter-spacing: -0.5px;
-        }
-
-        .hero p {
-            opacity: 0.9;
-
-            font-size: 16px;
-
-            max-width: 650px;
-
-            margin: auto;
-
-            line-height: 1.6;
-        }
-
-        /* ================= CONTAINER ================= */
-
-        .container {
-            max-width: 1120px;
-
-            margin: -30px auto 0;
-
-            padding: 0 20px 70px;
-
-            position: relative;
-
-            z-index: 5;
-        }
-
-        /* ================= STATS ================= */
-
-        .stats {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 16px;
-
-            margin-bottom: 38px;
-        }
-
-        .stat-card {
-            background:
-                rgba(255,255,255,0.96);
-
-            border-radius: 16px;
-
-            padding: 20px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-
-            box-shadow:
-                0 10px 30px rgba(15,23,42,0.09);
-
-            border:
-                1px solid #e8edf5;
-        }
-
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-
-            min-width: 50px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 14px;
-
-            background: #eff6ff;
-
-            font-size: 24px;
-        }
-
-        .stat-number {
-            font-size: 22px;
-
-            font-weight: 800;
-
-            color: #1e3a8a;
-        }
-
-        .stat-label {
-            color: #64748b;
-
-            font-size: 12px;
-
-            margin-top: 3px;
-        }
-
-        /* ================= TITLE ================= */
-
-        .section-title {
-            text-align: center;
-
-            margin-bottom: 28px;
-        }
-
-        .section-title h2 {
-            color: #1e3a8a;
-
-            font-size: 31px;
-
-            margin-bottom: 8px;
-        }
-
-        .section-title p {
-            color: #64748b;
-
-            font-size: 14px;
-        }
-
-        /* ================= FILTERS ================= */
-
-        .filters {
-            display: flex;
-
-            justify-content: center;
-
-            gap: 8px;
-
-            flex-wrap: wrap;
-
-            margin-bottom: 28px;
-        }
-
-        .filter-btn {
-            border: 1px solid #dbe3ef;
-
-            background: white;
-
-            color: #475569;
-
-            padding: 10px 15px;
-
-            border-radius: 9px;
-
-            cursor: pointer;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            transition: 0.25s;
-        }
-
-        .filter-btn:hover {
-            color: #2563eb;
-
-            border-color: #93c5fd;
-        }
-
-        .filter-btn.active {
-            color: white;
-
-            background: #2563eb;
-
-            border-color: #2563eb;
-
-            box-shadow:
-                0 6px 15px rgba(37,99,235,0.20);
-        }
-
-        /* ================= EVENTS GRID ================= */
-
-        .events {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 22px;
-        }
-
-        .event-card {
-            background: white;
-
-            border-radius: 19px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 8px 25px rgba(15,23,42,0.07);
-
-            transition:
-                transform 0.25s,
-                box-shadow 0.25s;
-
-            border:
-                1px solid #e8edf5;
-
-            animation:
-                fadeUp 0.45s ease both;
-        }
-
-        .event-card.hidden {
-            display: none;
-        }
-
-        .event-card:hover {
-            transform: translateY(-7px);
-
-            box-shadow:
-                0 18px 38px rgba(15,23,42,0.13);
-        }
-
-        @keyframes fadeUp {
-
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-        /* ================= EVENT TOP ================= */
-
-        .event-top {
-            padding: 23px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eff6ff,
-                    #dbeafe
-                );
-
-            border-bottom:
-                1px solid #dbeafe;
-        }
-
-        .event-icon {
-            width: 62px;
-            height: 62px;
-
-            border-radius: 17px;
-
-            background: white;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 32px;
-
-            box-shadow:
-                0 6px 17px rgba(37,99,235,0.12);
-        }
-
-        .date {
-            text-align: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1e3a8a,
-                    #2563eb
-                );
-
-            color: white;
-
-            min-width: 62px;
-
-            padding: 9px 11px;
-
-            border-radius: 11px;
-
-            box-shadow:
-                0 6px 15px rgba(37,99,235,0.20);
-        }
-
-        .date .day {
-            display: block;
-
-            font-size: 22px;
-
-            font-weight: 800;
-        }
-
-        .date .month {
-            font-size: 10px;
-
-            text-transform: uppercase;
-
-            opacity: 0.9;
-
-            letter-spacing: 0.5px;
-        }
-
-        /* ================= CONTENT ================= */
-
-        .event-content {
-            padding: 24px;
-        }
-
-        .event-content h3 {
-            color: #1e3a8a;
-
-            font-size: 20px;
-
-            margin-bottom: 9px;
-        }
-
-        .event-content p {
-            color: #64748b;
-
-            line-height: 1.65;
-
-            font-size: 13px;
-
-            margin-bottom: 17px;
-        }
-
-        /* ================= DETAILS ================= */
-
-        .details {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 8px;
-        }
-
-        .detail {
-            background: #f1f5f9;
-
-            color: #475569;
-
-            padding: 7px 10px;
-
-            border-radius: 7px;
-
-            font-size: 11px;
-
-            font-weight: 650;
-        }
-
-        /* ================= CATEGORY ================= */
-
-        .category {
-            display: inline-block;
-
-            margin-bottom: 10px;
-
-            padding: 5px 9px;
-
-            border-radius: 6px;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-            letter-spacing: 0.4px;
-        }
-
-        .tech {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-
-        .cultural {
-            background: #fce7f3;
-            color: #be185d;
-        }
-
-        .sports {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .career {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        /* ================= REGISTER ================= */
-
-        .register {
-            display: block;
-
-            width: 100%;
-
-            margin-top: 18px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #1d4ed8
-                );
-
-            color: white;
-
-            text-decoration: none;
-
-            padding: 12px 16px;
-
-            text-align: center;
-
-            border-radius: 9px;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            transition: 0.25s;
-
-            box-shadow:
-                0 6px 15px rgba(37,99,235,0.17);
-        }
-
-        .register:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 9px 20px rgba(37,99,235,0.25);
-        }
-
-        /* ================= FEATURED ================= */
-
-        .featured {
-            margin-top: 30px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #172554,
-                    #1d4ed8,
-                    #2563eb
-                );
-
-            color: white;
-
-            padding: 34px;
-
-            border-radius: 21px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 25px;
-
-            box-shadow:
-                0 15px 35px rgba(37,99,235,0.22);
-
-            overflow: hidden;
-
-            position: relative;
-        }
-
-        .featured::after {
-            content: "⭐";
-
-            position: absolute;
-
-            right: 30px;
-
-            bottom: -25px;
-
-            font-size: 110px;
-
-            opacity: 0.08;
-        }
-
-        .featured-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .featured small {
-            font-size: 11px;
-
-            font-weight: 800;
-
-            color: #bfdbfe;
-
-            letter-spacing: 1px;
-        }
-
-        .featured h2 {
-            margin: 5px 0 8px;
-
-            font-size: 25px;
-        }
-
-        .featured p {
-            opacity: 0.9;
-
-            font-size: 14px;
-
-            line-height: 1.6;
-
-            max-width: 650px;
-        }
-
-        .featured-btn {
-            position: relative;
-
-            z-index: 3;
-
-            background: white;
-
-            color: #1e3a8a;
-
-            padding: 13px 21px;
-
-            border-radius: 10px;
-
-            text-decoration: none;
-
-            font-weight: 800;
-
-            white-space: nowrap;
-
-            transition: 0.25s;
-        }
-
-        .featured-btn:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 8px 18px rgba(0,0,0,0.15);
-        }
-
-        /* ================= NO EVENTS ================= */
-
-        #noEvents {
-            display: none;
-
-            text-align: center;
-
-            background: white;
-
-            padding: 40px 20px;
-
-            border-radius: 16px;
-
-            color: #64748b;
-        }
-
-        #noEvents .big {
-            font-size: 42px;
-
-            margin-bottom: 8px;
-        }
-
-        /* ================= BACK ================= */
-
-        .back {
-            text-align: center;
-
-            margin-top: 40px;
-        }
-
-        .back a {
-            display: inline-block;
-
-            background: #1e3a8a;
-
-            color: white;
-
-            text-decoration: none;
-
-            padding: 13px 25px;
-
-            border-radius: 9px;
-
-            font-weight: 700;
-
-            transition: 0.25s;
-        }
-
-        .back a:hover {
-            background: #2563eb;
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 7px 16px rgba(37,99,235,0.20);
-        }
-
-        /* ================= MODAL ================= */
-
-        .modal {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(15,23,42,0.72);
-
-            backdrop-filter: blur(7px);
-
-            z-index: 3000;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 20px;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-box {
-            width: 100%;
-
-            max-width: 530px;
-
-            background: white;
-
-            border-radius: 22px;
-
-            padding: 32px;
-
-            position: relative;
-
-            box-shadow:
-                0 30px 80px rgba(0,0,0,0.30);
-
-            animation:
-                popup 0.25s ease;
-        }
-
-        @keyframes popup {
-
-            from {
-                opacity: 0;
-                transform: scale(0.94) translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-
-        }
-
-        .modal-icon {
-            width: 65px;
-            height: 65px;
-
-            border-radius: 17px;
-
-            background: #eff6ff;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 30px;
-
-            margin-bottom: 15px;
-        }
-
-        .modal-box h2 {
-            color: #1e3a8a;
-
-            font-size: 25px;
-
-            margin-bottom: 8px;
-
-            padding-right: 30px;
-        }
-
-        .modal-box p {
-            color: #64748b;
-
-            line-height: 1.6;
-
-            font-size: 14px;
-
-            margin-bottom: 20px;
-        }
-
-        .modal-success {
-            display: none;
-
-            background: #dcfce7;
-
-            color: #166534;
-
-            padding: 14px;
-
-            border-radius: 10px;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            margin-bottom: 15px;
-        }
-
-        .modal-success.show {
-            display: block;
-        }
-
-        .modal-form {
-            display: grid;
-
-            gap: 12px;
-        }
-
-        .modal-form input {
-            width: 100%;
-
-            padding: 13px;
-
-            border: 1px solid #dbe3ef;
-
-            border-radius: 9px;
-
-            outline: none;
-
-            font-size: 13px;
-        }
-
-        .modal-form input:focus {
-            border-color: #2563eb;
-
-            box-shadow:
-                0 0 0 3px rgba(37,99,235,0.09);
-        }
-
-        .submit-btn {
-            border: none;
-
-            padding: 13px;
-
-            border-radius: 9px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1e3a8a,
-                    #2563eb
-                );
-
-            color: white;
-
-            font-size: 13px;
-
-            font-weight: 800;
-
-            cursor: pointer;
-        }
-
-        .close {
-            position: absolute;
-
-            right: 17px;
-            top: 17px;
-
-            width: 37px;
-            height: 37px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #f1f5f9;
-
-            color: #475569;
-
-            font-size: 21px;
-
-            cursor: pointer;
-        }
-
-        .close:hover {
-            background: #fee2e2;
-
-            color: #dc2626;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            background: #0f172a;
-
-            color: #94a3b8;
-
-            text-align: center;
-
-            padding: 29px 20px;
-        }
-
-        footer h3 {
-            color: white;
-
-            margin-bottom: 7px;
-        }
-
-        footer p {
-            font-size: 13px;
-
-            margin-top: 5px;
-        }
-
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 800px) {
-
-            nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .events {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .featured {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .featured p {
-                margin: auto;
-            }
-
-        }
-
-        @media (max-width: 500px) {
-
-            .hero {
-                padding: 50px 18px 65px;
-            }
-
-            .hero h1 {
-                font-size: 30px;
-            }
-
-            .hero-icon {
-                width: 70px;
-                height: 70px;
-                font-size: 35px;
-            }
-
-            .container {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
-
-            .event-top {
-                padding: 18px;
-            }
-
-            .event-content {
-                padding: 20px;
-            }
-
-            .modal-box {
-                padding: 25px 20px;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Campus Events</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(
+135deg,
+#0f172a,
+#1e293b,
+#312e81,
+#2563eb
+);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+color:white;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:30px;
+}
+
+.back-btn{
+display:inline-block;
+padding:12px 20px;
+background:rgba(255,255,255,.12);
+color:white;
+text-decoration:none;
+border-radius:12px;
+margin-bottom:25px;
+}
+
+.header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.header h1{
+font-size:55px;
+font-weight:800;
+margin-bottom:10px;
+}
+
+.header p{
+opacity:.9;
+}
+
+.events{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:25px;
+padding:25px;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.icon{
+font-size:55px;
+margin-bottom:15px;
+}
+
+.date{
+color:#93c5fd;
+font-weight:600;
+margin:10px 0;
+}
+
+.card p{
+line-height:1.7;
+opacity:.9;
+}
+
+.register-btn{
+margin-top:18px;
+width:100%;
+padding:13px;
+border:none;
+border-radius:12px;
+background:linear-gradient(
+135deg,
+#2563eb,
+#7c3aed
+);
+color:white;
+font-weight:700;
+cursor:pointer;
+font-size:15px;
+}
+
+.register-btn:hover{
+opacity:.9;
+}
+
+.banner{
+margin-top:40px;
+padding:35px;
+border-radius:25px;
+text-align:center;
+background:linear-gradient(
+135deg,
+#7c3aed,
+#2563eb,
+#06b6d4
+);
+}
+
+.banner h2{
+font-size:35px;
+margin-bottom:10px;
+}
+
+.registered-box{
+margin-top:35px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:25px;
+}
+
+.registered-box h2{
+margin-bottom:15px;
+}
+
+.registered-item{
+background:rgba(255,255,255,.08);
+padding:12px;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+</style>
 </head>
-
 
 <body>
 
+<div class="container">
+
+<a href="dashboard.html" class="back-btn">
+← Back to Dashboard
+</a>
+
+<div class="header">
+<h1>🎉 Campus Events</h1>
+<p>Discover • Register • Participate</p>
+</div>
+
+<div class="events">
+
+<div class="card">
+<div class="icon">🚀</div>
+<h2>Tech Fest 2026</h2>
+<div class="date">15 Oct 2026</div>
+<p>
+Coding, AI, Robotics,
+Hackathon and Innovation Challenges.
+</p>
+<button class="register-btn"
+onclick="registerEvent('Tech Fest 2026')">
+Register Now
+</button>
+</div>
+
+<div class="card">
+<div class="icon">🎤</div>
+<h2>Cultural Night</h2>
+<div class="date">22 Oct 2026</div>
+<p>
+Dance, Music,
+Fashion Show and Talent Hunt.
+</p>
+<button class="register-btn"
+onclick="registerEvent('Cultural Night')">
+Register Now
+</button>
+</div>
+
+<div class="card">
+<div class="icon">⚽</div>
+<h2>Sports Tournament</h2>
+<div class="date">30 Oct 2026</div>
+<p>
+Football, Cricket,
+Badminton and Athletics.
+</p>
+<button class="register-btn"
+onclick="registerEvent('Sports Tournament')">
+Register Now
+</button>
+</div>
+
+<div class="card">
+<div class="icon">💼</div>
+<h2>Career Fair</h2>
+<div class="date">05 Nov 2026</div>
+<p>
+Placement Drives,
+Internships and Career Guidance.
+</p>
+<button class="register-btn"
+onclick="registerEvent('Career Fair')">
+Register Now
+</button>
+</div>
+
+<div class="card">
+<div class="icon">🤖</div>
+<h2>AI Workshop</h2>
+<div class="date">12 Nov 2026</div>
+<p>
+Machine Learning,
+AI Tools and Chatbot Building.
+</p>
+<button class="register-btn"
+onclick="registerEvent('AI Workshop')">
+Register Now
+</button>
+</div>
+
+<div class="card">
+<div class="icon">🌱</div>
+<h2>Green Campus Drive</h2>
+<div class="date">20 Nov 2026</div>
+<p>
+Tree Plantation,
+Eco Awareness and Sustainability.
+</p>
+<button class="register-btn"
+onclick="registerEvent('Green Campus Drive')">
+Register Now
+</button>
+</div>
+
+</div>
+
+<div class="banner">
+<h2>🔥 Mega Event 2026</h2>
+<p>
+Smart Campus Innovation Summit • Startups • AI • Technology
+</p>
+</div>
 
-    <!-- ================= NAVBAR ================= -->
+<div class="registered-box">
+<h2>✅ My Registered Events</h2>
+<div id="registeredEvents"></div>
+</div>
 
-    <nav>
+</div>
 
-        <a href="index.html" class="logo">
-            🎓 Smart Campus
-        </a>
+<script>
 
+let events =
+JSON.parse(
+localStorage.getItem("registeredEvents")
+) || [];
 
-        <div class="nav-links">
+function registerEvent(name){
 
-            <a href="index.html">
-                Home
-            </a>
+if(events.includes(name)){
+alert("⚠ Already Registered");
+return;
+}
 
-            <a href="notices.html">
-                📢 Notices
-            </a>
+events.push(name);
 
-            <a href="timetable.html">
-                📅 Timetable
-            </a>
+localStorage.setItem(
+"registeredEvents",
+JSON.stringify(events)
+);
 
-            <a href="events.html" class="active">
-                🎉 Events
-            </a>
+alert("🎉 Registered for " + name);
 
-            <a href="location.html">
-                📍 Location
-            </a>
+showEvents();
+}
 
-            <a href="login.html">
-                🔐 Login
-            </a>
+function showEvents(){
 
-        </div>
+const box =
+document.getElementById("registeredEvents");
 
-    </nav>
+if(events.length===0){
 
+box.innerHTML =
+"<p>No registrations yet.</p>";
 
-    <!-- ================= HERO ================= -->
+return;
+}
 
-    <section class="hero">
+box.innerHTML="";
 
-        <div class="hero-content">
+events.forEach(function(event){
 
-            <div class="hero-icon">
-                🎉
-            </div>
+box.innerHTML +=
+`<div class="registered-item">
+🎟 ${event}
+</div>`;
 
-            <h1>
-                Campus Events
-            </h1>
+});
+}
 
-            <p>
-                Discover exciting events, activities and programs
-                happening at MUIT Noida.
-            </p>
+showEvents();
 
-        </div>
-
-    </section>
-
-
-    <!-- ================= MAIN ================= -->
-
-    <main class="container">
-
-
-        <!-- ================= STATS ================= -->
-
-        <section class="stats">
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🎉
-                </div>
-
-                <div>
-
-                    <div class="stat-number">
-                        4
-                    </div>
-
-                    <div class="stat-label">
-                        Upcoming Events
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    👥
-                </div>
-
-                <div>
-
-                    <div class="stat-number">
-                        500+
-                    </div>
-
-                    <div class="stat-label">
-                        Expected Students
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    📍
-                </div>
-
-                <div>
-
-                    <div class="stat-number">
-                        MUIT
-                    </div>
-
-                    <div class="stat-label">
-                        Noida Campus
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= TITLE ================= -->
-
-        <div class="section-title">
-
-            <h2>
-                🎊 Upcoming Events
-            </h2>
-
-            <p>
-                Explore campus activities and register for your favourites.
-            </p>
-
-        </div>
-
-
-        <!-- ================= FILTER ================= -->
-
-        <div class="filters">
-
-            <button
-                class="filter-btn active"
-                onclick="filterEvents('all', this)"
-            >
-                All Events
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterEvents('tech', this)"
-            >
-                💻 Technology
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterEvents('cultural', this)"
-            >
-                🎤 Cultural
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterEvents('sports', this)"
-            >
-                🏆 Sports
-            </button>
-
-            <button
-                class="filter-btn"
-                onclick="filterEvents('career', this)"
-            >
-                💼 Career
-            </button>
-
-        </div>
-
-
-        <!-- ================= EVENT GRID ================= -->
-
-        <section class="events" id="eventList">
-
-
-            <!-- EVENT 1 -->
-
-            <article
-                class="event-card"
-                data-category="tech"
-            >
-
-                <div class="event-top">
-
-                    <div class="event-icon">
-                        💻
-                    </div>
-
-                    <div class="date">
-
-                        <span class="day">
-                            12
-                        </span>
-
-                        <span class="month">
-                            Sep
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="event-content">
-
-                    <span class="category tech">
-                        💻 TECHNOLOGY
-                    </span>
-
-                    <h3>
-                        Tech Fest 2026
-                    </h3>
-
-                    <p>
-                        A technology festival featuring coding,
-                        innovation, robotics and exciting student projects.
-                    </p>
-
-
-                    <div class="details">
-
-                        <span class="detail">
-                            🕘 10:00 AM
-                        </span>
-
-                        <span class="detail">
-                            📍 Main Auditorium
-                        </span>
-
-                    </div>
-
-
-                    <a
-                        href="#"
-                        class="register"
-                        onclick="registerEvent('Tech Fest 2026'); return false;"
-                    >
-                        Register Now →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- EVENT 2 -->
-
-            <article
-                class="event-card"
-                data-category="cultural"
-            >
-
-                <div class="event-top">
-
-                    <div class="event-icon">
-                        🎤
-                    </div>
-
-                    <div class="date">
-
-                        <span class="day">
-                            18
-                        </span>
-
-                        <span class="month">
-                            Sep
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="event-content">
-
-                    <span class="category cultural">
-                        🎤 CULTURAL
-                    </span>
-
-                    <h3>
-                        Student Cultural Fest
-                    </h3>
-
-                    <p>
-                        Enjoy music, dance, drama and creative
-                        performances by students from different departments.
-                    </p>
-
-
-                    <div class="details">
-
-                        <span class="detail">
-                            🕐 1:00 PM
-                        </span>
-
-                        <span class="detail">
-                            📍 College Ground
-                        </span>
-
-                    </div>
-
-
-                    <a
-                        href="#"
-                        class="register"
-                        onclick="registerEvent('Student Cultural Fest'); return false;"
-                    >
-                        Register Now →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- EVENT 3 -->
-
-            <article
-                class="event-card"
-                data-category="sports"
-            >
-
-                <div class="event-top">
-
-                    <div class="event-icon">
-                        🏆
-                    </div>
-
-                    <div class="date">
-
-                        <span class="day">
-                            22
-                        </span>
-
-                        <span class="month">
-                            Sep
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="event-content">
-
-                    <span class="category sports">
-                        🏆 SPORTS
-                    </span>
-
-                    <h3>
-                        Inter College Sports Meet
-                    </h3>
-
-                    <p>
-                        Participate in exciting sports competitions
-                        and represent your college.
-                    </p>
-
-
-                    <div class="details">
-
-                        <span class="detail">
-                            🕘 9:00 AM
-                        </span>
-
-                        <span class="detail">
-                            📍 Sports Complex
-                        </span>
-
-                    </div>
-
-
-                    <a
-                        href="#"
-                        class="register"
-                        onclick="registerEvent('Inter College Sports Meet'); return false;"
-                    >
-                        Register Now →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- EVENT 4 -->
-
-            <article
-                class="event-card"
-                data-category="career"
-            >
-
-                <div class="event-top">
-
-                    <div class="event-icon">
-                        🧠
-                    </div>
-
-                    <div class="date">
-
-                        <span class="day">
-                            27
-                        </span>
-
-                        <span class="month">
-                            Sep
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="event-content">
-
-                    <span class="category career">
-                        💼 CAREER
-                    </span>
-
-                    <h3>
-                        Career & Placement Seminar
-                    </h3>
-
-                    <p>
-                        Meet industry professionals and learn about
-                        internships, careers and placement opportunities.
-                    </p>
-
-
-                    <div class="details">
-
-                        <span class="detail">
-                            🕚 11:00 AM
-                        </span>
-
-                        <span class="detail">
-                            📍 Seminar Hall
-                        </span>
-
-                    </div>
-
-
-                    <a
-                        href="#"
-                        class="register"
-                        onclick="registerEvent('Career & Placement Seminar'); return false;"
-                    >
-                        Register Now →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-        </section>
-
-
-        <!-- ================= NO EVENTS ================= -->
-
-        <div id="noEvents">
-
-            <div class="big">
-                🔎
-            </div>
-
-            <h3>
-                No events found
-            </h3>
-
-            <p>
-                Try selecting another category.
-            </p>
-
-        </div>
-
-
-        <!-- ================= FEATURED ================= -->
-
-        <section class="featured">
-
-            <div class="featured-content">
-
-                <small>
-                    ⭐ FEATURED CAMPUS EVENT
-                </small>
-
-                <h2>
-                    Tech Fest 2026
-                </h2>
-
-                <p>
-                    Get ready for a day full of coding, robotics,
-                    innovation and exciting student projects.
-                    Show your skills and be part of the campus experience!
-                </p>
-
-            </div>
-
-
-            <a
-                href="#"
-                class="featured-btn"
-                onclick="registerEvent('Tech Fest 2026'); return false;"
-            >
-                Join Event →
-            </a>
-
-        </section>
-
-
-        <!-- ================= BACK ================= -->
-
-        <div class="back">
-
-            <a href="index.html">
-                ← Back to Home
-            </a>
-
-        </div>
-
-
-    </main>
-
-
-    <!-- ================= REGISTRATION MODAL ================= -->
-
-    <div
-        class="modal"
-        id="registrationModal"
-        onclick="closeOutside(event)"
-    >
-
-        <div class="modal-box">
-
-            <button
-                class="close"
-                onclick="closeModal()"
-            >
-                ×
-            </button>
-
-
-            <div class="modal-icon">
-                🎉
-            </div>
-
-
-            <h2 id="eventTitle">
-                Event Registration
-            </h2>
-
-
-            <p>
-                Enter your details below to register for this campus event.
-            </p>
-
-
-            <div
-                class="modal-success"
-                id="successMessage"
-            >
-                ✅ Registration successful! Your event registration
-                has been recorded for this demo.
-            </div>
-
-
-            <form
-                class="modal-form"
-                id="registrationForm"
-                onsubmit="submitRegistration(event)"
-            >
-
-                <input
-                    type="text"
-                    id="studentName"
-                    placeholder="Enter your name"
-                    required
-                >
-
-
-                <input
-                    type="text"
-                    id="studentId"
-                    placeholder="Enter student ID"
-                    required
-                >
-
-
-                <input
-                    type="email"
-                    id="studentEmail"
-                    placeholder="Enter email address"
-                    required
-                >
-
-
-                <button
-                    type="submit"
-                    class="submit-btn"
-                >
-                    Confirm Registration →
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <h3>
-            🎓 Smart Campus Assistant
-        </h3>
-
-        <p>
-            Your Digital Campus Companion
-        </p>
-
-        <p>
-            MUIT Noida | © 2026 Smart Campus Assistant
-        </p>
-
-    </footer>
-
-
-    <!-- ================= JAVASCRIPT ================= -->
-
-    <script>
-
-        let selectedEvent = "";
-
-
-        /* ================= REGISTER ================= */
-
-        function registerEvent(eventName) {
-
-            selectedEvent = eventName;
-
-
-            document.getElementById(
-                "eventTitle"
-            ).innerText =
-                "Register for " + eventName;
-
-
-            document.getElementById(
-                "registrationModal"
-            ).classList.add("show");
-
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            document.getElementById(
-                "successMessage"
-            ).classList.remove("show");
-
-
-            document.getElementById(
-                "registrationForm"
-            ).style.display = "grid";
-
-        }
-
-
-        /* ================= SUBMIT ================= */
-
-        function submitRegistration(event) {
-
-            event.preventDefault();
-
-
-            const name =
-                document.getElementById(
-                    "studentName"
-                ).value.trim();
-
-
-            const studentId =
-                document.getElementById(
-                    "studentId"
-                ).value.trim();
-
-
-            const email =
-                document.getElementById(
-                    "studentEmail"
-                ).value.trim();
-
-
-            if (
-                name === "" ||
-                studentId === "" ||
-                email === ""
-            ) {
-
-                return;
-
-            }
-
-
-            localStorage.setItem(
-                "lastEventRegistration",
-                JSON.stringify({
-                    event: selectedEvent,
-                    name: name,
-                    studentId: studentId,
-                    email: email
-                })
-            );
-
-
-            document.getElementById(
-                "registrationForm"
-            ).style.display = "none";
-
-
-            document.getElementById(
-                "successMessage"
-            ).classList.add("show");
-
-        }
-
-
-        /* ================= CLOSE ================= */
-
-        function closeModal() {
-
-            document.getElementById(
-                "registrationModal"
-            ).classList.remove("show");
-
-
-            document.body.style.overflow =
-                "auto";
-
-        }
-
-
-        /* ================= OUTSIDE CLICK ================= */
-
-        function closeOutside(event) {
-
-            if (
-                event.target.id ===
-                "registrationModal"
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-
-
-        /* ================= FILTER ================= */
-
-        function filterEvents(
-            category,
-            button
-        ) {
-
-            const cards =
-                document.querySelectorAll(
-                    ".event-card"
-                );
-
-
-            const buttons =
-                document.querySelectorAll(
-                    ".filter-btn"
-                );
-
-
-            buttons.forEach(function(btn) {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-            button.classList.add(
-                "active"
-            );
-
-
-            let visible = 0;
-
-
-            cards.forEach(function(card) {
-
-                const cardCategory =
-                    card.dataset.category;
-
-
-                if (
-                    category === "all" ||
-                    cardCategory === category
-                ) {
-
-                    card.classList.remove(
-                        "hidden"
-                    );
-
-                    visible++;
-
-                }
-
-                else {
-
-                    card.classList.add(
-                        "hidden"
-                    );
-
-                }
-
-            });
-
-
-            const noEvents =
-                document.getElementById(
-                    "noEvents"
-                );
-
-
-            if (visible === 0) {
-
-                noEvents.style.display =
-                    "block";
-
-            }
-
-            else {
-
-                noEvents.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        /* ================= ESCAPE ================= */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeModal();
-
-                }
-
-            }
-        );
-
-    </script>
-
+</script>
 
 </body>
-
 </html>
-```

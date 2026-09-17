@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Attendance Calculator | Smart Campus</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:550px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(15px);
+border-radius:25px;
+padding:30px;
+color:white;
+box-shadow:0 10px 40px rgba(0,0,0,.2);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+opacity:.85;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:white;
+color:#1e3a8a;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.02);
+}
+
+.result{
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:rgba(255,255,255,0.12);
+display:none;
+}
+
+.progress{
+width:100%;
+height:20px;
+background:rgba(255,255,255,0.2);
+border-radius:20px;
+overflow:hidden;
+margin:15px 0;
+}
+
+.progress-bar{
+height:100%;
+border-radius:20px;
+}
+
+.success{
+color:#86efac;
+font-weight:bold;
+}
+
+.warning{
+color:#fca5a5;
+font-weight:bold;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:20px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>📊 Attendance Calculator</h1>
+
+<p class="subtitle">
+Check attendance and know how many classes you can miss
+</p>
+
+<input
+type="number"
+id="total"
+placeholder="Total Classes Conducted">
+
+<input
+type="number"
+id="attended"
+placeholder="Classes Attended">
+
+<button onclick="calculateAttendance()">
+Calculate Attendance
+</button>
+
+<div id="result" class="result"></div>
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+
+<script>
+
+function calculateAttendance(){
+
+let total =
+parseInt(document.getElementById("total").value);
+
+let attended =
+parseInt(document.getElementById("attended").value);
+
+if(
+isNaN(total) ||
+isNaN(attended) ||
+total <= 0 ||
+attended > total
+){
+alert("Please enter valid values");
+return;
+}
+
+let percentage =
+(attended / total) * 100;
+
+let status = "";
+let extraMessage = "";
+let barColor = "";
+
+if(percentage >= 75){
+
+barColor = "#22c55e";
+
+let miss = 0;
+
+while(
+(attended / (total + miss)) * 100 >= 75
+){
+miss++;
+}
+
+status = `
+<p class="success">
+✅ Safe Attendance
+</p>
+`;
+
+extraMessage = `
+<p>
+You can miss <b>${miss-1}</b> more classes and still maintain 75%.
+</p>
+`;
+
+}else{
+
+barColor = "#ef4444";
+
+let need = 0;
+
+while(
+((attended + need) / (total + need)) * 100 < 75
+){
+need++;
+}
+
+status = `
+<p class="warning">
+⚠ Attendance Below 75%
+</p>
+`;
+
+extraMessage = `
+<p>
+📚 You need to attend <b>${need}</b> more consecutive classes to reach 75%.
+</p>
+`;
+
+}
+
+document.getElementById("result").style.display = "block";
+
+document.getElementById("result").innerHTML = `
+
+<h2>Attendance: ${percentage.toFixed(2)}%</h2>
+
+${status}
+
+<div class="progress">
+<div
+class="progress-bar"
+style="
+width:${percentage}%;
+background:${barColor};
+">
+</div>
+</div>
+
+${extraMessage}
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>

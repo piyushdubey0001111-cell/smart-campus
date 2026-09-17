@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deadline Reminder | Smart Campus</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+min-height:100vh;
+padding:30px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+color:white;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:40px;
+}
+
+.header p{
+opacity:.8;
+margin-top:10px;
+}
+
+.card{
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(12px);
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+color:white;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+input{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:none;
+border-radius:12px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:white;
+color:#1e3a8a;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.02);
+}
+
+.deadline{
+background:rgba(255,255,255,.15);
+padding:18px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.days{
+font-size:18px;
+font-weight:bold;
+margin-top:8px;
+color:#fde68a;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>🔔 Deadline Reminder</h1>
+<p>Never miss assignments, fees or registrations</p>
+</div>
+
+<div class="card">
+
+<input
+type="text"
+id="title"
+placeholder="Deadline Title">
+
+<input
+type="date"
+id="date">
+
+<button onclick="addDeadline()">
+Add Deadline
+</button>
+
+</div>
+
+<div id="deadlines"></div>
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+
+<script>
+
+function addDeadline(){
+
+let title =
+document.getElementById("title").value;
+
+let date =
+document.getElementById("date").value;
+
+if(title==="" || date===""){
+alert("Fill all fields");
+return;
+}
+
+let today =
+new Date();
+
+let dueDate =
+new Date(date);
+
+let diff =
+dueDate - today;
+
+let days =
+Math.ceil(
+diff / (1000*60*60*24)
+);
+
+let status="";
+
+if(days > 0){
+status=`${days} day(s) left`;
+}
+else if(days === 0){
+status="⚠ Due Today";
+}
+else{
+status="❌ Deadline Passed";
+}
+
+document.getElementById("deadlines").innerHTML += `
+
+<div class="card deadline">
+
+<h2>📌 ${title}</h2>
+
+<p>Due Date: ${date}</p>
+
+<div class="days">
+${status}
+</div>
+
+</div>
+
+`;
+
+document.getElementById("title").value="";
+document.getElementById("date").value="";
+
+}
+
+</script>
+
+</body>
+</html>

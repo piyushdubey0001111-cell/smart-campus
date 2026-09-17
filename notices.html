@@ -1,1771 +1,231 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Notices | Smart Campus</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background:
-                radial-gradient(circle at top left, #dbeafe 0, transparent 32%),
-                radial-gradient(circle at bottom right, #e0e7ff 0, transparent 30%),
-                #f8fafc;
-            color: #1e293b;
-            min-height: 100vh;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        nav {
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-
-            padding: 15px 6%;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            border-bottom: 1px solid rgba(148,163,184,0.15);
-
-            box-shadow:
-                0 5px 25px rgba(15,23,42,0.07);
-        }
-
-        .logo {
-            color: #1e3a8a;
-            font-size: 21px;
-            font-weight: 800;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #475569;
-            font-size: 13px;
-            font-weight: 650;
-            padding: 8px 11px;
-            border-radius: 8px;
-            transition: 0.25s;
-        }
-
-        .nav-links a:hover {
-            color: #2563eb;
-            background: #eff6ff;
-        }
-
-        .nav-links a.active {
-            color: #2563eb;
-            background: #dbeafe;
-        }
-
-        /* ================= HERO ================= */
-
-        header {
-            position: relative;
-            overflow: hidden;
-
-            background:
-                linear-gradient(135deg, #172554, #1d4ed8, #3b82f6);
-
-            color: white;
-            text-align: center;
-
-            padding: 65px 20px 75px;
-
-            box-shadow:
-                0 15px 35px rgba(37,99,235,0.20);
-        }
-
-        header::before {
-            content: "";
-            position: absolute;
-
-            width: 300px;
-            height: 300px;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,0.08);
-
-            top: -170px;
-            left: -80px;
-        }
-
-        header::after {
-            content: "";
-            position: absolute;
-
-            width: 380px;
-            height: 380px;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,0.07);
-
-            bottom: -260px;
-            right: -100px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        header .icon {
-            width: 82px;
-            height: 82px;
-
-            margin: 0 auto 18px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 24px;
-
-            background: rgba(255,255,255,0.15);
-
-            border: 1px solid rgba(255,255,255,0.25);
-
-            backdrop-filter: blur(10px);
-
-            font-size: 43px;
-
-            box-shadow:
-                0 12px 35px rgba(0,0,0,0.12);
-        }
-
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        header p {
-            opacity: 0.9;
-            font-size: 16px;
-        }
-
-        /* ================= MAIN ================= */
-
-        .container {
-            max-width: 1100px;
-
-            margin: -28px auto 0;
-
-            padding: 0 20px 70px;
-
-            position: relative;
-            z-index: 5;
-        }
-
-        /* ================= STATS ================= */
-
-        .stats {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 16px;
-
-            margin-bottom: 35px;
-        }
-
-        .stat-card {
-            background: rgba(255,255,255,0.96);
-
-            border-radius: 16px;
-
-            padding: 20px;
-
-            display: flex;
-            align-items: center;
-
-            gap: 15px;
-
-            box-shadow:
-                0 10px 30px rgba(15,23,42,0.09);
-
-            border: 1px solid rgba(226,232,240,0.8);
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 13px;
-
-            background: #eff6ff;
-
-            font-size: 24px;
-        }
-
-        .stat-number {
-            font-size: 23px;
-            font-weight: 800;
-            color: #1e3a8a;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #64748b;
-            margin-top: 2px;
-        }
-
-        /* ================= TITLE ================= */
-
-        .title {
-            text-align: center;
-            margin: 20px 0 25px;
-        }
-
-        .title h2 {
-            font-size: 31px;
-            color: #1e3a8a;
-            margin-bottom: 7px;
-        }
-
-        .title p {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        /* ================= SEARCH ================= */
-
-        .tools {
-            display: flex;
-
-            gap: 12px;
-
-            margin-bottom: 25px;
-
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 230px;
-
-            position: relative;
-        }
-
-        .search-box span {
-            position: absolute;
-
-            left: 15px;
-            top: 50%;
-
-            transform: translateY(-50%);
-
-            font-size: 17px;
-        }
-
-        .search-box input {
-            width: 100%;
-
-            padding: 14px 15px 14px 45px;
-
-            border: 1px solid #dbe3ef;
-
-            border-radius: 11px;
-
-            outline: none;
-
-            background: white;
-
-            font-size: 14px;
-
-            color: #334155;
-
-            transition: 0.25s;
-        }
-
-        .search-box input:focus {
-            border-color: #2563eb;
-
-            box-shadow:
-                0 0 0 4px rgba(37,99,235,0.09);
-        }
-
-        /* ================= FILTER ================= */
-
-        .filters {
-            display: flex;
-
-            gap: 7px;
-
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            border: 1px solid #dbe3ef;
-
-            background: white;
-
-            color: #475569;
-
-            padding: 10px 14px;
-
-            border-radius: 9px;
-
-            cursor: pointer;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            transition: 0.25s;
-        }
-
-        .filter-btn:hover {
-            border-color: #93c5fd;
-            color: #2563eb;
-        }
-
-        .filter-btn.active {
-            background: #2563eb;
-            color: white;
-            border-color: #2563eb;
-
-            box-shadow:
-                0 6px 15px rgba(37,99,235,0.20);
-        }
-
-        /* ================= FEATURED ================= */
-
-        .featured {
-            background:
-                linear-gradient(135deg, #eff6ff, #ffffff);
-
-            border: 1px solid #bfdbfe;
-
-            border-radius: 18px;
-
-            padding: 22px;
-
-            margin-bottom: 25px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-
-            box-shadow:
-                0 10px 30px rgba(37,99,235,0.08);
-        }
-
-        .featured-icon {
-            width: 55px;
-            height: 55px;
-
-            min-width: 55px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: #2563eb;
-
-            color: white;
-
-            border-radius: 15px;
-
-            font-size: 25px;
-        }
-
-        .featured-content {
-            flex: 1;
-        }
-
-        .featured-content small {
-            color: #2563eb;
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            letter-spacing: 0.5px;
-        }
-
-        .featured-content h3 {
-            color: #1e3a8a;
-
-            font-size: 18px;
-
-            margin: 4px 0;
-        }
-
-        .featured-content p {
-            color: #64748b;
-
-            font-size: 13px;
-
-            line-height: 1.5;
-        }
-
-        /* ================= NOTICE LIST ================= */
-
-        .notices {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 17px;
-        }
-
-        .notice-card {
-            display: flex;
-
-            align-items: center;
-
-            gap: 20px;
-
-            background: rgba(255,255,255,0.98);
-
-            padding: 21px;
-
-            border-radius: 16px;
-
-            box-shadow:
-                0 7px 25px rgba(15,23,42,0.07);
-
-            border: 1px solid #e8edf5;
-
-            border-left: 5px solid #2563eb;
-
-            transition:
-                transform 0.25s,
-                box-shadow 0.25s;
-
-            animation: fadeUp 0.45s ease both;
-        }
-
-        .notice-card:hover {
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 14px 32px rgba(15,23,42,0.11);
-        }
-
-        .notice-card.hidden {
-            display: none;
-        }
-
-        @keyframes fadeUp {
-
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-        /* ================= DATE ================= */
-
-        .date-box {
-            min-width: 72px;
-
-            height: 72px;
-
-            background:
-                linear-gradient(135deg, #dbeafe, #eff6ff);
-
-            color: #1e40af;
-
-            border-radius: 13px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-weight: bold;
-
-            border: 1px solid #bfdbfe;
-        }
-
-        .date-box .day {
-            font-size: 24px;
-        }
-
-        .date-box .month {
-            font-size: 11px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.5px;
-        }
-
-        /* ================= CONTENT ================= */
-
-        .notice-content {
-            flex: 1;
-        }
-
-        .notice-content h3 {
-            color: #1e3a8a;
-
-            margin-bottom: 6px;
-
-            font-size: 18px;
-        }
-
-        .notice-content p {
-            color: #64748b;
-
-            line-height: 1.55;
-
-            font-size: 13px;
-        }
-
-        /* ================= BADGES ================= */
-
-        .badge {
-            display: inline-block;
-
-            margin-top: 9px;
-
-            padding: 5px 9px;
-
-            border-radius: 6px;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-            letter-spacing: 0.3px;
-        }
-
-        .important {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-
-        .academic {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .event {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .general {
-            background: #e0e7ff;
-            color: #4338ca;
-        }
-
-        /* ================= VIEW BUTTON ================= */
-
-        .view-btn {
-            border: none;
-
-            padding: 11px 18px;
-
-            background:
-                linear-gradient(135deg, #2563eb, #1d4ed8);
-
-            color: white;
-
-            border-radius: 9px;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition: 0.25s;
-
-            white-space: nowrap;
-
-            box-shadow:
-                0 5px 13px rgba(37,99,235,0.17);
-        }
-
-        .view-btn:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 8px 18px rgba(37,99,235,0.25);
-        }
-
-        /* ================= NO RESULT ================= */
-
-        #noResults {
-            display: none;
-
-            text-align: center;
-
-            padding: 45px 20px;
-
-            background: white;
-
-            border-radius: 16px;
-
-            color: #64748b;
-        }
-
-        #noResults .big {
-            font-size: 40px;
-            margin-bottom: 8px;
-        }
-
-        /* ================= BACK ================= */
-
-        .back-container {
-            text-align: center;
-            margin-top: 35px;
-        }
-
-        .back {
-            display: inline-block;
-
-            padding: 13px 25px;
-
-            background: #1e3a8a;
-
-            color: white;
-
-            text-decoration: none;
-
-            border-radius: 9px;
-
-            font-weight: 600;
-
-            transition: 0.25s;
-
-            box-shadow:
-                0 6px 16px rgba(30,58,138,0.18);
-        }
-
-        .back:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        /* ================= MODAL ================= */
-
-        .modal {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            background: rgba(15,23,42,0.70);
-
-            backdrop-filter: blur(7px);
-
-            z-index: 2000;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 20px;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-box {
-            width: 100%;
-
-            max-width: 590px;
-
-            background: white;
-
-            border-radius: 22px;
-
-            padding: 32px;
-
-            position: relative;
-
-            box-shadow:
-                0 30px 80px rgba(0,0,0,0.30);
-
-            animation: popup 0.25s ease;
-        }
-
-        @keyframes popup {
-
-            from {
-                transform: translateY(20px) scale(0.96);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-
-        }
-
-        .close {
-            position: absolute;
-
-            right: 18px;
-            top: 17px;
-
-            width: 37px;
-            height: 37px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #f1f5f9;
-
-            color: #475569;
-
-            font-size: 21px;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .close:hover {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .modal-date {
-            color: #2563eb;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            margin-bottom: 8px;
-        }
-
-        .modal-box h2 {
-            color: #1e3a8a;
-
-            font-size: 25px;
-
-            margin-bottom: 14px;
-
-            padding-right: 35px;
-        }
-
-        .modal-box p {
-            color: #64748b;
-
-            line-height: 1.75;
-
-            font-size: 14px;
-
-            margin-bottom: 17px;
-        }
-
-        .modal-info {
-            background: #eff6ff;
-
-            color: #1e40af;
-
-            padding: 14px;
-
-            border-radius: 11px;
-
-            font-size: 12px;
-
-            line-height: 1.6;
-
-            border-left: 4px solid #2563eb;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            margin-top: 10px;
-
-            background: #0f172a;
-
-            color: #94a3b8;
-
-            text-align: center;
-
-            padding: 28px;
-
-            font-size: 13px;
-        }
-
-        footer strong {
-            color: white;
-            font-size: 14px;
-        }
-
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 750px) {
-
-            nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .nav-links {
-                gap: 3px;
-            }
-
-            header h1 {
-                font-size: 31px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .featured {
-                align-items: flex-start;
-            }
-
-            .notice-card {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .view-btn {
-                width: 100%;
-            }
-
-        }
-
-        @media (max-width: 500px) {
-
-            header {
-                padding: 48px 18px 58px;
-            }
-
-            header h1 {
-                font-size: 27px;
-            }
-
-            header .icon {
-                width: 68px;
-                height: 68px;
-                font-size: 34px;
-            }
-
-            .container {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
-
-            .title h2 {
-                font-size: 26px;
-            }
-
-            .date-box {
-                width: 70px;
-            }
-
-            .modal-box {
-                padding: 25px 20px;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Notices</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#0f172a,#1e293b,#312e81,#2563eb);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+color:white;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+}
+
+.header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.header h1{
+font-size:55px;
+}
+
+.notice-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:25px;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.card h2{
+margin-bottom:10px;
+}
+
+.date{
+color:#93c5fd;
+margin-bottom:10px;
+}
+
+.btn{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.back{
+display:inline-block;
+margin-bottom:25px;
+padding:12px 20px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:12px;
+}
+
+/* POPUP */
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup-box{
+background:white;
+color:black;
+width:90%;
+max-width:500px;
+padding:25px;
+border-radius:20px;
+}
+
+.popup-box h2{
+margin-bottom:15px;
+}
+
+.close-btn{
+margin-top:20px;
+padding:10px 18px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
 </head>
-
 
 <body>
 
+<div class="container">
 
-    <!-- ================= NAVBAR ================= -->
+<a href="dashboard.html" class="back">
+← Dashboard
+</a>
 
-    <nav>
+<div class="header">
+<h1>📢 Campus Notices</h1>
+</div>
 
-        <a href="index.html" class="logo">
-            🎓 Smart Campus
-        </a>
+<div class="notice-grid">
 
+<div class="card">
+<h2>📝 Mid Semester Exams</h2>
+<div class="date">10 Oct 2026</div>
+<p>Exam schedule released.</p>
 
-        <div class="nav-links">
+<button class="btn"
+onclick="showNotice(
+'Mid Semester Exams',
+'Mid semester examination schedule has been released. Check all subjects carefully.'
+)">
+View Notice
+</button>
+</div>
 
-            <a href="index.html">
-                Home
-            </a>
+<div class="card">
+<h2>🎉 Tech Fest Registration</h2>
+<div class="date">12 Oct 2026</div>
+<p>Registration now open.</p>
 
-            <a href="notices.html" class="active">
-                📢 Notices
-            </a>
+<button class="btn"
+onclick="showNotice(
+'Tech Fest Registration',
+'Registration is open for Coding, Robotics, AI and Innovation Challenges.'
+)">
+View Notice
+</button>
+</div>
 
-            <a href="timetable.html">
-                📅 Timetable
-            </a>
+<div class="card">
+<h2>💰 Fee Submission</h2>
+<div class="date">15 Oct 2026</div>
+<p>Last date announced.</p>
 
-            <a href="events.html">
-                🎉 Events
-            </a>
+<button class="btn"
+onclick="showNotice(
+'Fee Submission',
+'Last date for fee submission is 25 October. Late fees may apply after deadline.'
+)">
+View Notice
+</button>
+</div>
 
-            <a href="location.html">
-                📍 Location
-            </a>
+</div>
 
-            <a href="login.html">
-                🔐 Login
-            </a>
+</div>
 
-        </div>
+<!-- POPUP -->
 
-    </nav>
+<div class="popup" id="popup">
 
+<div class="popup-box">
 
-    <!-- ================= HERO ================= -->
+<h2 id="noticeTitle"></h2>
 
-    <header>
+<p id="noticeMessage"></p>
 
-        <div class="hero-content">
+<button class="close-btn"
+onclick="closeNotice()">
+Close
+</button>
 
-            <div class="icon">
-                📢
-            </div>
+</div>
 
-            <h1>
-                College Notices
-            </h1>
+</div>
 
-            <p>
-                Stay informed. Stay updated. Never miss an important announcement.
-            </p>
+<script>
 
-        </div>
+function showNotice(title,message){
 
-    </header>
+document.getElementById("noticeTitle").innerText=title;
 
+document.getElementById("noticeMessage").innerText=message;
 
-    <!-- ================= MAIN ================= -->
+document.getElementById("popup").style.display="flex";
 
-    <main class="container">
+}
 
+function closeNotice(){
 
-        <!-- ================= STATS ================= -->
+document.getElementById("popup").style.display="none";
 
-        <section class="stats">
+}
 
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    📢
-                </div>
-
-                <div>
-                    <div class="stat-number">
-                        5
-                    </div>
-
-                    <div class="stat-label">
-                        Total Notices
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🚨
-                </div>
-
-                <div>
-                    <div class="stat-number">
-                        2
-                    </div>
-
-                    <div class="stat-label">
-                        Important Notices
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🕐
-                </div>
-
-                <div>
-                    <div class="stat-number">
-                        Latest
-                    </div>
-
-                    <div class="stat-label">
-                        Updated September 2026
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= TITLE ================= -->
-
-        <div class="title">
-
-            <h2>
-                Latest Announcements
-            </h2>
-
-            <p>
-                Search and filter notices to find exactly what you need.
-            </p>
-
-        </div>
-
-
-        <!-- ================= SEARCH + FILTER ================= -->
-
-        <div class="tools">
-
-            <div class="search-box">
-
-                <span>
-                    🔎
-                </span>
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search notices..."
-                    onkeyup="filterNotices()"
-                >
-
-            </div>
-
-
-            <div class="filters">
-
-                <button
-                    class="filter-btn active"
-                    onclick="setFilter('all', this)"
-                >
-                    All
-                </button>
-
-                <button
-                    class="filter-btn"
-                    onclick="setFilter('important', this)"
-                >
-                    🚨 Important
-                </button>
-
-                <button
-                    class="filter-btn"
-                    onclick="setFilter('academic', this)"
-                >
-                    📚 Academic
-                </button>
-
-                <button
-                    class="filter-btn"
-                    onclick="setFilter('event', this)"
-                >
-                    🎉 Events
-                </button>
-
-                <button
-                    class="filter-btn"
-                    onclick="setFilter('general', this)"
-                >
-                    ℹ️ General
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- ================= FEATURED ================= -->
-
-        <section class="featured">
-
-            <div class="featured-icon">
-                ⭐
-            </div>
-
-            <div class="featured-content">
-
-                <small>
-                    FEATURED NOTICE
-                </small>
-
-                <h3>
-                    Mid-Semester Examination Notice
-                </h3>
-
-                <p>
-                    Examination-related information is currently
-                    the most important update for students.
-                </p>
-
-            </div>
-
-            <button
-                class="view-btn"
-                onclick="openNotice(
-                    'Mid-Semester Examination Notice',
-                    '06 September 2026',
-                    'Students are informed that the upcoming mid-semester examinations will begin from the scheduled date. Please check the examination timetable carefully.',
-                    'Please verify the final examination schedule with the college administration.'
-                )"
-            >
-                View
-            </button>
-
-        </section>
-
-
-        <!-- ================= NOTICE LIST ================= -->
-
-        <section class="notices" id="noticeList">
-
-
-            <!-- NOTICE 1 -->
-
-            <article
-                class="notice-card"
-                data-category="important"
-            >
-
-                <div class="date-box">
-
-                    <span class="day">
-                        06
-                    </span>
-
-                    <span class="month">
-                        Sep
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <h3>
-                        Mid-Semester Examination Notice
-                    </h3>
-
-                    <p>
-                        Students are informed that the upcoming
-                        mid-semester examinations will begin from
-                        the scheduled date. Please check the
-                        examination timetable carefully.
-                    </p>
-
-                    <span class="badge important">
-                        🚨 IMPORTANT
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="openNotice(
-                        'Mid-Semester Examination Notice',
-                        '06 September 2026',
-                        'Students are informed that the upcoming mid-semester examinations will begin from the scheduled date. Please check the examination timetable carefully.',
-                        'Please verify the final examination schedule with the college administration.'
-                    )"
-                >
-                    View
-                </button>
-
-            </article>
-
-
-            <!-- NOTICE 2 -->
-
-            <article
-                class="notice-card"
-                data-category="academic"
-            >
-
-                <div class="date-box">
-
-                    <span class="day">
-                        04
-                    </span>
-
-                    <span class="month">
-                        Sep
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <h3>
-                        Assignment Submission
-                    </h3>
-
-                    <p>
-                        All students are requested to submit
-                        their pending assignments before the
-                        given deadline.
-                    </p>
-
-                    <span class="badge academic">
-                        📚 ACADEMIC
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="openNotice(
-                        'Assignment Submission',
-                        '04 September 2026',
-                        'All students are requested to submit their pending assignments before the given deadline.',
-                        'Students should contact their respective faculty members for subject-specific submission details.'
-                    )"
-                >
-                    View
-                </button>
-
-            </article>
-
-
-            <!-- NOTICE 3 -->
-
-            <article
-                class="notice-card"
-                data-category="event"
-            >
-
-                <div class="date-box">
-
-                    <span class="day">
-                        01
-                    </span>
-
-                    <span class="month">
-                        Sep
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <h3>
-                        College Event Registration
-                    </h3>
-
-                    <p>
-                        Registration is now open for upcoming
-                        college events. Interested students can
-                        register through the college event desk.
-                    </p>
-
-                    <span class="badge event">
-                        🎉 EVENT
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="openNotice(
-                        'College Event Registration',
-                        '01 September 2026',
-                        'Registration is now open for upcoming college events. Interested students can register through the college event desk.',
-                        'Visit the Events page to explore upcoming campus activities.'
-                    )"
-                >
-                    View
-                </button>
-
-            </article>
-
-
-            <!-- NOTICE 4 -->
-
-            <article
-                class="notice-card"
-                data-category="general"
-            >
-
-                <div class="date-box">
-
-                    <span class="day">
-                        28
-                    </span>
-
-                    <span class="month">
-                        Aug
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <h3>
-                        Library Timing Update
-                    </h3>
-
-                    <p>
-                        The central library will remain open
-                        during extended hours for students
-                        preparing for examinations.
-                    </p>
-
-                    <span class="badge general">
-                        ℹ️ GENERAL
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="openNotice(
-                        'Library Timing Update',
-                        '28 August 2026',
-                        'The central library will remain open during extended hours for students preparing for examinations.',
-                        'Students are advised to confirm the current library schedule before visiting.'
-                    )"
-                >
-                    View
-                </button>
-
-            </article>
-
-
-            <!-- NOTICE 5 -->
-
-            <article
-                class="notice-card"
-                data-category="important"
-            >
-
-                <div class="date-box">
-
-                    <span class="day">
-                        25
-                    </span>
-
-                    <span class="month">
-                        Aug
-                    </span>
-
-                </div>
-
-
-                <div class="notice-content">
-
-                    <h3>
-                        Attendance Reminder
-                    </h3>
-
-                    <p>
-                        Students are advised to maintain the
-                        required attendance percentage as per
-                        college guidelines.
-                    </p>
-
-                    <span class="badge important">
-                        🚨 IMPORTANT
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="openNotice(
-                        'Attendance Reminder',
-                        '25 August 2026',
-                        'Students are advised to maintain the required attendance percentage as per college guidelines.',
-                        'Please contact your department for the applicable attendance requirements.'
-                    )"
-                >
-                    View
-                </button>
-
-            </article>
-
-
-        </section>
-
-
-        <!-- ================= NO RESULTS ================= -->
-
-        <div id="noResults">
-
-            <div class="big">
-                🔎
-            </div>
-
-            <h3>
-                No notices found
-            </h3>
-
-            <p>
-                Try another search or category.
-            </p>
-
-        </div>
-
-
-        <!-- ================= BACK ================= -->
-
-        <div class="back-container">
-
-            <a href="index.html" class="back">
-                ← Back to Home
-            </a>
-
-        </div>
-
-
-    </main>
-
-
-    <!-- ================= MODAL ================= -->
-
-    <div
-        class="modal"
-        id="noticeModal"
-        onclick="closeOutside(event)"
-    >
-
-        <div class="modal-box">
-
-            <button
-                class="close"
-                onclick="closeNotice()"
-                aria-label="Close"
-            >
-                ×
-            </button>
-
-
-            <div
-                class="modal-date"
-                id="modalDate"
-            >
-            </div>
-
-
-            <h2 id="modalTitle">
-            </h2>
-
-
-            <p id="modalDescription">
-            </p>
-
-
-            <div
-                class="modal-info"
-                id="modalInfo"
-            >
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <strong>
-            🎓 Smart Campus Assistant
-        </strong>
-
-        <br><br>
-
-        MUIT Noida | Designed for Students
-
-    </footer>
-
-
-    <!-- ================= JAVASCRIPT ================= -->
-
-    <script>
-
-        let currentFilter = "all";
-
-
-        /* ================= OPEN NOTICE ================= */
-
-        function openNotice(
-            title,
-            date,
-            description,
-            info
-        ) {
-
-            document.getElementById(
-                "modalTitle"
-            ).innerText = title;
-
-
-            document.getElementById(
-                "modalDate"
-            ).innerText = "📅 " + date;
-
-
-            document.getElementById(
-                "modalDescription"
-            ).innerText = description;
-
-
-            document.getElementById(
-                "modalInfo"
-            ).innerText = "ℹ️ " + info;
-
-
-            document.getElementById(
-                "noticeModal"
-            ).classList.add("show");
-
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        /* ================= CLOSE NOTICE ================= */
-
-        function closeNotice() {
-
-            document.getElementById(
-                "noticeModal"
-            ).classList.remove("show");
-
-
-            document.body.style.overflow =
-                "auto";
-
-        }
-
-
-        /* ================= OUTSIDE CLICK ================= */
-
-        function closeOutside(event) {
-
-            if (
-                event.target.id ===
-                "noticeModal"
-            ) {
-
-                closeNotice();
-
-            }
-
-        }
-
-
-        /* ================= FILTER ================= */
-
-        function setFilter(
-            filter,
-            button
-        ) {
-
-            currentFilter = filter;
-
-
-            const buttons =
-                document.querySelectorAll(
-                    ".filter-btn"
-                );
-
-
-            buttons.forEach(function(btn) {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-            button.classList.add(
-                "active"
-            );
-
-
-            filterNotices();
-
-        }
-
-
-        /* ================= SEARCH + FILTER ================= */
-
-        function filterNotices() {
-
-            const search =
-                document.getElementById(
-                    "searchInput"
-                ).value
-                .toLowerCase()
-                .trim();
-
-
-            const cards =
-                document.querySelectorAll(
-                    ".notice-card"
-                );
-
-
-            let visible = 0;
-
-
-            cards.forEach(function(card) {
-
-                const text =
-                    card.innerText.toLowerCase();
-
-
-                const category =
-                    card.dataset.category;
-
-
-                const matchesSearch =
-                    text.includes(search);
-
-
-                const matchesCategory =
-                    currentFilter === "all" ||
-                    category === currentFilter;
-
-
-                if (
-                    matchesSearch &&
-                    matchesCategory
-                ) {
-
-                    card.classList.remove(
-                        "hidden"
-                    );
-
-                    visible++;
-
-                }
-
-                else {
-
-                    card.classList.add(
-                        "hidden"
-                    );
-
-                }
-
-            });
-
-
-            const noResults =
-                document.getElementById(
-                    "noResults"
-                );
-
-
-            if (visible === 0) {
-
-                noResults.style.display =
-                    "block";
-
-            }
-
-            else {
-
-                noResults.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        /* ================= ESCAPE KEY ================= */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeNotice();
-
-                }
-
-            }
-        );
-
-    </script>
-
+</script>
 
 </body>
-
 </html>
-```

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lost & Found | Smart Campus</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+min-height:100vh;
+padding:40px 20px;
+color:white;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.header h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.header p{
+opacity:0.85;
+font-size:16px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.15);
+border-radius:25px;
+padding:25px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h2{
+margin-bottom:15px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+outline:none;
+background:rgba(255,255,255,0.9);
+}
+
+button{
+margin-top:15px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#ffffff;
+color:#1e3a8a;
+font-weight:bold;
+cursor:pointer;
+font-size:15px;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+.item{
+background:rgba(255,255,255,0.08);
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.item h3{
+margin-bottom:5px;
+}
+
+.badge{
+display:inline-block;
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+margin-top:8px;
+}
+
+.lost{
+background:#fecaca;
+color:#991b1b;
+}
+
+.found{
+background:#bbf7d0;
+color:#166534;
+}
+
+.back{
+display:inline-block;
+margin-bottom:25px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+<div class="header">
+<h1>🎒 Lost & Found Hub</h1>
+<p>Find your stuff. Help others. Keep campus connected.</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>📢 Report Lost Item</h2>
+
+<input type="text" placeholder="Item Name">
+
+<textarea rows="5"
+placeholder="Describe your lost item..."></textarea>
+
+<button>Submit Report</button>
+
+</div>
+
+<div class="card">
+
+<h2>✅ Recently Found</h2>
+
+<div class="item">
+<h3>🎧 Black Boat Earbuds</h3>
+<p>Found near Computer Lab</p>
+<span class="badge found">FOUND</span>
+</div>
+
+<div class="item">
+<h3>📱 Samsung Phone</h3>
+<p>Found in Library</p>
+<span class="badge found">FOUND</span>
+</div>
+
+<div class="item">
+<h3>🧾 College ID Card</h3>
+<p>Found near Canteen</p>
+<span class="badge found">FOUND</span>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🚨 Recently Lost</h2>
+
+<div class="item">
+<h3>🎒 Blue Backpack</h3>
+<p>Last seen in Academic Block</p>
+<span class="badge lost">LOST</span>
+</div>
+
+<div class="item">
+<h3>⌚ Smart Watch</h3>
+<p>Lost near Sports Ground</p>
+<span class="badge lost">LOST</span>
+</div>
+
+<div class="item">
+<h3>🔑 Hostel Keys</h3>
+<p>Lost near Main Gate</p>
+<span class="badge lost">LOST</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>s

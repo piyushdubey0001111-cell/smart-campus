@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Complaint Portal | Smart Campus</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+min-height:100vh;
+padding:30px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+color:white;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:38px;
+}
+
+.header p{
+opacity:.8;
+margin-top:10px;
+}
+
+.card{
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(15px);
+padding:25px;
+border-radius:20px;
+color:white;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+select,
+textarea,
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:white;
+color:#1e3a8a;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.complaint{
+background:rgba(255,255,255,.15);
+padding:18px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.badge{
+display:inline-block;
+padding:6px 12px;
+border-radius:20px;
+background:#22c55e;
+font-size:12px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>📝 Complaint Portal</h1>
+<p>Report campus issues quickly and easily</p>
+</div>
+
+<div class="card">
+
+<select id="category">
+<option value="">Select Category</option>
+<option>📶 WiFi Issue</option>
+<option>🏫 Classroom Issue</option>
+<option>🍔 Canteen Issue</option>
+<option>🏠 Hostel Issue</option>
+<option>🔧 Infrastructure Issue</option>
+</select>
+
+<input
+type="text"
+id="title"
+placeholder="Complaint Title">
+
+<textarea
+id="description"
+placeholder="Describe your issue">
+</textarea>
+
+<button onclick="submitComplaint()">
+Submit Complaint
+</button>
+
+</div>
+
+<div id="complaints"></div>
+
+<a href="dashboard.html" class="back">
+← Back to Dashboard
+</a>
+
+</div>
+
+<script>
+
+function submitComplaint(){
+
+let category =
+document.getElementById("category").value;
+
+let title =
+document.getElementById("title").value;
+
+let description =
+document.getElementById("description").value;
+
+if(
+category === "" ||
+title === "" ||
+description === ""
+){
+alert("Please fill all fields");
+return;
+}
+
+document.getElementById("complaints").innerHTML += `
+
+<div class="card complaint">
+
+<h2>${title}</h2>
+
+<p><b>Category:</b> ${category}</p>
+
+<br>
+
+<p>${description}</p>
+
+<span class="badge">
+Submitted
+</span>
+
+</div>
+
+`;
+
+document.getElementById("category").value="";
+document.getElementById("title").value="";
+document.getElementById("description").value="";
+
+}
+
+</script>
+
+</body>
+</html>

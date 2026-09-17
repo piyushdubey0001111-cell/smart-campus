@@ -1,1457 +1,793 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Student Dashboard | Smart Campus</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #2563eb;
-            --dark-blue: #1e3a8a;
-            --bg: #f4f7fb;
-            --card: #ffffff;
-            --text: #1e293b;
-            --muted: #64748b;
-            --border: #e2e8f0;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        nav {
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(12px);
-            padding: 15px 6%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 18px rgba(15,23,42,0.08);
-        }
-
-        .logo {
-            color: var(--dark-blue);
-            text-decoration: none;
-            font-size: 21px;
-            font-weight: 800;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 17px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: #475569;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .logout {
-            background: #fee2e2;
-            color: #b91c1c !important;
-            padding: 9px 14px;
-            border-radius: 8px;
-        }
-
-        .logout:hover {
-            background: #fecaca;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(255,255,255,0.18),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #172554,
-                    #1d4ed8,
-                    #2563eb
-                );
-
-            color: white;
-            padding: 48px 6%;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            gap: 30px;
-        }
-
-        .hero-text h1 {
-            font-size: 35px;
-            margin-bottom: 8px;
-        }
-
-        .hero-text p {
-            opacity: 0.88;
-            font-size: 15px;
-        }
-
-        .student-box {
-            min-width: 250px;
-            background: rgba(255,255,255,0.13);
-            border: 1px solid rgba(255,255,255,0.20);
-            padding: 18px 22px;
-            border-radius: 17px;
-            backdrop-filter: blur(10px);
-        }
-
-        .student-box small {
-            opacity: 0.75;
-        }
-
-        .student-box strong {
-            display: block;
-            margin-top: 5px;
-            font-size: 18px;
-        }
-
-        .status {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 5px 9px;
-            background: rgba(34,197,94,0.18);
-            color: #bbf7d0;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        /* ================= CONTAINER ================= */
-
-        .container {
-            max-width: 1150px;
-            margin: 35px auto;
-            padding: 0 20px 60px;
-        }
-
-        /* ================= SECTION TITLE ================= */
-
-        .section-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-
-        .section-title h2 {
-            color: var(--dark-blue);
-            font-size: 23px;
-        }
-
-        .section-title a {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        /* ================= STATS ================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 18px;
-            margin-bottom: 35px;
-        }
-
-        .stat {
-            background: var(--card);
-            padding: 22px;
-            border-radius: 16px;
-            box-shadow: 0 7px 22px rgba(15,23,42,0.07);
-            border: 1px solid #eef2f7;
-            transition: 0.3s;
-        }
-
-        .stat:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(15,23,42,0.12);
-        }
-
-        .stat-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .stat h3 {
-            color: var(--dark-blue);
-            font-size: 23px;
-        }
-
-        .stat p {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        /* ================= TOP GRID ================= */
-
-        .top-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 22px;
-            margin-bottom: 35px;
-        }
-
-        .panel {
-            background: var(--card);
-            border-radius: 18px;
-            padding: 25px;
-            box-shadow: 0 7px 22px rgba(15,23,42,0.07);
-            border: 1px solid #eef2f7;
-        }
-
-        /* ================= PROFILE ================= */
-
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .avatar {
-            width: 75px;
-            height: 75px;
-            flex-shrink: 0;
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #dbeafe,
-                    #bfdbfe
-                );
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 40px;
-        }
-
-        .profile-info h2 {
-            color: var(--dark-blue);
-            font-size: 21px;
-        }
-
-        .profile-info p {
-            color: var(--muted);
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        .profile-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 12px;
-        }
-
-        .tag {
-            background: #eff6ff;
-            color: #1e40af;
-            padding: 6px 9px;
-            border-radius: 7px;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        /* ================= ATTENDANCE ================= */
-
-        .attendance-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .attendance-header h2 {
-            color: var(--dark-blue);
-            font-size: 21px;
-        }
-
-        .percentage {
-            color: #15803d;
-            font-size: 24px;
-            font-weight: 800;
-        }
-
-        .progress {
-            height: 13px;
-            background: #e2e8f0;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            width: 82%;
-            height: 100%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #16a34a,
-                    #22c55e
-                );
-
-            border-radius: 20px;
-        }
-
-        .attendance-note {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 12px;
-            line-height: 1.5;
-        }
-
-        /* ================= QUICK ACCESS ================= */
-
-        .actions {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 18px;
-            margin-bottom: 38px;
-        }
-
-        .action {
-            background: var(--card);
-            padding: 24px 18px;
-            text-align: center;
-            border-radius: 16px;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 7px 22px rgba(15,23,42,0.07);
-            border: 1px solid #eef2f7;
-            transition: 0.3s;
-        }
-
-        .action:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 14px 30px rgba(15,23,42,0.13);
-        }
-
-        .action-icon {
-            font-size: 35px;
-            margin-bottom: 9px;
-        }
-
-        .action h3 {
-            color: var(--dark-blue);
-            font-size: 16px;
-        }
-
-        .action p {
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 5px;
-        }
-
-        /* ================= MAIN GRID ================= */
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 0.7fr;
-            gap: 22px;
-        }
-
-        /* ================= CLASSES ================= */
-
-        .class-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 0;
-            border-bottom: 1px solid #eef2f7;
-        }
-
-        .class-item:last-child {
-            border-bottom: none;
-        }
-
-        .time {
-            min-width: 82px;
-            background: #eff6ff;
-            color: #1e40af;
-            padding: 9px;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .class-info h3 {
-            color: #334155;
-            font-size: 15px;
-        }
-
-        .class-info p {
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        /* ================= NOTICES ================= */
-
-        .notice {
-            padding: 15px 0;
-            border-bottom: 1px solid #eef2f7;
-        }
-
-        .notice:last-child {
-            border-bottom: none;
-        }
-
-        .notice h3 {
-            color: var(--dark-blue);
-            font-size: 14px;
-        }
-
-        .notice p {
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.5;
-            margin-top: 5px;
-        }
-
-        .badge {
-            display: inline-block;
-            margin-top: 7px;
-            padding: 5px 8px;
-            border-radius: 6px;
-            background: #fee2e2;
-            color: #b91c1c;
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-        /* ================= FEES ================= */
-
-        .fees-panel {
-            margin-top: 22px;
-            background: var(--card);
-            border-radius: 18px;
-            padding: 25px;
-            box-shadow: 0 7px 22px rgba(15,23,42,0.07);
-            border: 1px solid #eef2f7;
-        }
-
-        .fees-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .fees-header h2 {
-            color: var(--dark-blue);
-            font-size: 21px;
-        }
-
-        .fees-header p {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .fees-header a {
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        .fees-summary {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .fee-box {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 18px;
-        }
-
-        .fee-box p {
-            color: var(--muted);
-            font-size: 11px;
-            margin-bottom: 7px;
-        }
-
-        .fee-box strong {
-            font-size: 22px;
-            color: var(--dark-blue);
-        }
-
-        .fee-paid {
-            color: #16a34a !important;
-        }
-
-        .fee-remaining {
-            color: #f59e0b !important;
-        }
-
-        .fee-progress {
-            height: 9px;
-            background: #e2e8f0;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-top: 18px;
-        }
-
-        .fee-progress-bar {
-            width: 60%;
-            height: 100%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #2563eb,
-                    #60a5fa
-                );
-
-            border-radius: 20px;
-        }
-
-        .fee-note {
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 8px;
-        }
-
-        /* ================= EVENT BANNER ================= */
-
-        .event-banner {
-            margin-top: 22px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #7c3aed,
-                    #2563eb
-                );
-
-            color: white;
-            padding: 24px;
-            border-radius: 17px;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .event-banner h2 {
-            font-size: 19px;
-            margin-bottom: 5px;
-        }
-
-        .event-banner p {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .event-btn {
-            background: white;
-            color: #1e3a8a;
-            padding: 11px 17px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 800;
-            white-space: nowrap;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            background: #0f172a;
-            color: #cbd5e1;
-            text-align: center;
-            padding: 27px 20px;
-            font-size: 13px;
-        }
-
-        footer strong {
-            color: white;
-        }
-
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 1050px) {
-
-            .stats,
-            .actions {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .top-grid,
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .nav-links {
-                justify-content: center;
-            }
-
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .hero-text h1 {
-                font-size: 28px;
-            }
-
-            .stats,
-            .actions,
-            .fees-summary {
-                grid-template-columns: 1fr;
-            }
-
-            .event-banner {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .profile {
-                align-items: flex-start;
-            }
-
-            .fees-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Campus Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+min-height:100vh;
+background:
+linear-gradient(
+135deg,
+#020617,
+#0f172a,
+#1e1b4b,
+#312e81,
+#2563eb
+);
+background-size:400% 400%;
+animation:bgMove 15s ease infinite;
+overflow-x:hidden;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:20px;
+}
+
+nav{
+position:sticky;
+top:0;
+z-index:999;
+background:rgba(15,23,42,.65);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.navbar{
+max-width:1300px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:800;
+color:white;
+}
+
+.nav-links{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+opacity:.8;
+transition:.3s;
+}
+
+.nav-links a:hover{
+opacity:1;
+color:#60a5fa;
+}
+
+header{
+text-align:center;
+padding:70px 20px 40px;
+color:white;
+}
+
+header h1{
+font-size:65px;
+font-weight:800;
+margin-bottom:10px;
+text-shadow:0 0 30px rgba(255,255,255,.25);
+}
+
+header p{
+font-size:18px;
+opacity:.85;
+}
+
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:30px;
+padding:25px;
+margin-bottom:25px;
+color:white;
+box-shadow:
+0 8px 32px rgba(0,0,0,.25);
+}
+
+.welcome{
+position:relative;
+overflow:hidden;
+}
+
+.welcome::before{
+content:"";
+position:absolute;
+width:350px;
+height:350px;
+background:#60a5fa;
+filter:blur(150px);
+opacity:.15;
+top:-100px;
+right:-100px;
+}
+
+.welcome-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+flex-wrap:wrap;
+position:relative;
+z-index:2;
+}
+
+.gradient{
+background:
+linear-gradient(
+90deg,
+#60a5fa,
+#22d3ee,
+#a855f7
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.badge{
+padding:12px 20px;
+border-radius:50px;
+background:rgba(255,255,255,.1);
+font-weight:600;
+}
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
+margin-top:25px;
+}
+
+.stat{
+background:rgba(255,255,255,.06);
+padding:18px;
+border-radius:22px;
+text-align:center;
+transition:.3s;
+}
+
+.stat:hover{
+transform:translateY(-5px);
+background:rgba(255,255,255,.12);
+}
+
+.stat h3{
+font-size:32px;
+margin:8px 0;
+}
+
+.progress{
+height:10px;
+background:rgba(255,255,255,.12);
+border-radius:50px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progress-fill{
+height:100%;
+width:82%;
+background:
+linear-gradient(
+90deg,
+#22c55e,
+#06b6d4
+);
+}
+
+.grid{
+display:grid;
+grid-template-columns:
+2fr 1fr;
+gap:25px;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:25px;
+flex-wrap:wrap;
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:60px;
+
+background:
+linear-gradient(
+135deg,
+#60a5fa,
+#a855f7
+);
+
+box-shadow:
+0 0 40px rgba(168,85,247,.35);
+}
+
+.profile-info h2{
+margin-bottom:8px;
+}
+
+.profile-info p{
+opacity:.85;
+margin-bottom:5px;
+}
+
+.section-title{
+font-size:24px;
+margin-bottom:15px;
+font-weight:700;
+}
+
+.class-item{
+padding:15px;
+margin-bottom:12px;
+background:rgba(255,255,255,.05);
+border-radius:16px;
+border-left:4px solid #60a5fa;
+}
+
+.notice{
+padding:14px;
+margin-bottom:12px;
+background:rgba(255,255,255,.05);
+border-radius:16px;
+}.fees-card{
+text-align:center;
+}
+
+.fees-amount{
+font-size:42px;
+font-weight:800;
+margin:15px 0;
+color:#22d3ee;
+}
+
+.result-card{
+text-align:center;
+}
+
+.cgpa{
+font-size:55px;
+font-weight:800;
+background:linear-gradient(
+90deg,
+#22d3ee,
+#60a5fa,
+#a855f7
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.banner{
+text-align:center;
+padding:40px;
+position:relative;
+overflow:hidden;
+
+background:
+linear-gradient(
+135deg,
+#7c3aed,
+#2563eb,
+#06b6d4
+);
+}
+
+.banner h2{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.banner p{
+font-size:18px;
+opacity:.95;
+}
+
+.banner-btn{
+display:inline-block;
+margin-top:20px;
+padding:14px 30px;
+border-radius:50px;
+background:white;
+color:#111827;
+font-weight:700;
+text-decoration:none;
+transition:.3s;
+}
+
+.banner-btn:hover{
+transform:scale(1.05);
+}
+
+.quick-title{
+text-align:center;
+color:white;
+font-size:34px;
+margin:40px 0 25px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.12);
+border-radius:28px;
+padding:28px;
+text-decoration:none;
+color:white;
+text-align:center;
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:-100%;
+left:-100%;
+width:250%;
+height:250%;
+background:
+linear-gradient(
+45deg,
+transparent,
+rgba(255,255,255,.18),
+transparent
+);
+transform:rotate(25deg);
+transition:.8s;
+}
+
+.card:hover::before{
+left:100%;
+top:100%;
+}
+
+.card:hover{
+transform:
+translateY(-12px)
+scale(1.04);
+
+box-shadow:
+0 0 25px rgba(96,165,250,.35),
+0 0 45px rgba(168,85,247,.25);
+}
+
+.icon{
+font-size:60px;
+margin-bottom:12px;
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+}
+
+.card h3{
+margin-bottom:10px;
+font-size:20px;
+}
+
+.card p{
+opacity:.85;
+font-size:14px;
+}
+
+footer{
+text-align:center;
+padding:40px 20px;
+color:white;
+opacity:.8;
+}
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+header h1{
+font-size:45px;
+}
+
+}
+
+@media(max-width:600px){
+
+.navbar{
+flex-direction:column;
+gap:15px;
+}
+
+header h1{
+font-size:38px;
+}
+
+.quick-title{
+font-size:28px;
+}
+
+}
+
+</style>
 </head>
-
 
 <body>
 
+<nav>
 
-    <!-- ================= DASHBOARD PROTECTION ================= -->
+<div class="navbar">
 
-    <script>
+<div class="logo">
+🎓 Smart Campus
+</div>
 
-        const isLoggedIn =
-            localStorage.getItem("studentLoggedIn");
+<div class="nav-links">
 
-        if (isLoggedIn !== "true") {
+<a href="#">Home</a>
+<a href="attendance.html">Attendance</a>
+<a href="notices.html">Notices</a>
+<a href="profile.html">Profile</a>
+<a href="results.html">Results</a>
 
-            window.location.replace(
-                "login.html"
-            );
+</div>
 
-        }
+</div>
 
-    </script>
+</nav>
 
+<header>
 
-    <!-- ================= NAVBAR ================= -->
+<h1>Smart Campus</h1>
 
-    <nav>
+<p>
+✨ Apple Style • Gen-Z Design • Futuristic Experience ✨
+</p>
 
-        <a href="index.html" class="logo">
-            🎓 Smart Campus
-        </a>
+</header>
 
-        <div class="nav-links">
+<div class="container">
 
-            <a href="dashboard.html">
-                🏠 Dashboard
-            </a>
+<div class="glass welcome">
 
-            <a href="notices.html">
-                📢 Notices
-            </a>
+<div class="welcome-top">
 
-            <a href="timetable.html">
-                📅 Timetable
-            </a>
+<div>
 
-            <a href="events.html">
-                🎉 Events
-            </a>
+<h2>
+👋 Welcome Back,
+<span class="gradient">Student</span>
+</h2>
 
-            <a href="location.html">
-                📍 Location
-            </a>
+<p style="margin-top:10px;">
+Your Digital Campus Assistant is ready.
+</p>
 
-            <a href="fees.html">
-                💰 Fees
-            </a>
+</div>
 
-            <a
-                href="#"
-                class="logout"
-                onclick="logoutStudent(); return false;"
-            >
-                🚪 Logout
-            </a>
+<div class="badge">
+🔥 Active Student
+</div>
 
-        </div>
+</div>
 
-    </nav>
+<div class="stats">
 
+<div class="stat">
 
-    <!-- ================= HERO ================= -->
+📊
 
-    <section class="hero">
+<h3>82%</h3>
 
-        <div class="hero-text">
+<p>Attendance</p>
 
-            <h1>
-                Welcome Back,
-                <span id="welcomeName">
-                    Student
-                </span>! 👋
-            </h1>
+<div class="progress">
+<div class="progress-fill"></div>
+</div>
 
-            <p>
-                Here's your personalized Smart Campus dashboard.
-            </p>
+</div>
 
-        </div>
+<div class="stat">
+🔔
+<h3>3</h3>
+<p>Deadlines</p>
+</div>
 
+<div class="stat">
+📢
+<h3>5</h3>
+<p>Notices</p>
+</div>
 
-        <div class="student-box">
+<div class="stat">
+🎉
+<h3>4</h3>
+<p>Events</p>
+</div>
 
-            <small>
-                Logged in as
-            </small>
+</div>
 
-            <strong id="studentId">
-                student123
-            </strong>
+</div>
 
-            <span class="status">
-                ● Active Student
-            </span>
+<div class="grid">
 
-        </div>
+<div>
 
-    </section>
+<div class="glass">
 
+<h2 class="section-title">
+👤 Student Profile
+</h2>
 
-    <!-- ================= MAIN ================= -->
+<div class="profile">
 
-    <main class="container">
+<div class="avatar">
+🎓
+</div>
 
+<div class="profile-info">
 
-        <!-- ================= STATS ================= -->
+<h2>Student</h2>
 
-        <section class="stats">
+<p>B.Tech CSE • 2nd Year</p>
 
-            <div class="stat">
+<p>🆔 Student ID: 123456</p>
 
-                <div class="stat-icon">
-                    📚
-                </div>
+<p>📧 student@college.edu</p>
 
-                <h3>
-                    6
-                </h3>
+<p>🏫 Section: CSE-A</p>
 
-                <p>
-                    Today's Classes
-                </p>
+</div>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="stat">
+<div class="glass">
 
-                <div class="stat-icon">
-                    📢
-                </div>
+<h2 class="section-title">
+📚 Today's Classes
+</h2>
 
-                <h3>
-                    5
-                </h3>
+<div class="class-item">
+09:00 AM — Data Structures
+</div>
 
-                <p>
-                    Active Notices
-                </p>
+<div class="class-item">
+10:00 AM — DBMS
+</div>
 
-            </div>
+<div class="class-item">
+11:30 AM — Web Development Lab
+</div>
 
+<div class="class-item">
+02:00 PM — Software Engineering
+</div>
 
-            <div class="stat">
+</div>
 
-                <div class="stat-icon">
-                    🎉
-                </div>
+</div>
 
-                <h3>
-                    4
-                </h3>
+<div>
+<div class="glass fees-card">
 
-                <p>
-                    Upcoming Events
-                </p>
+<h2 class="section-title">
+💰 Fees Overview
+</h2>
 
-            </div>
+<div class="fees-amount">
+₹20,000
+</div>
 
+<p>Pending Fees</p>
 
-            <div class="stat">
+<br>
 
-                <div class="stat-icon">
-                    📊
-                </div>
+<p>Total Fees: ₹50,000</p>
+<p>Paid: ₹30,000</p>
 
-                <h3>
-                    82%
-                </h3>
+</div>
 
-                <p>
-                    Attendance
-                </p>
+<div class="glass result-card">
 
-            </div>
+<h2 class="section-title">
+🏆 Results Snapshot
+</h2>
 
+<div class="cgpa">
+8.4
+</div>
 
-            <!-- FEES STAT -->
+<p>Current CGPA</p>
 
-            <div class="stat">
+<br>
 
-                <div class="stat-icon">
-                    💰
-                </div>
+<p>Status: Passed ✅</p>
 
-                <h3 style="color:#f59e0b;">
-                    ₹20K
-                </h3>
+</div>
 
-                <p>
-                    Remaining Fees
-                </p>
+<div class="glass">
 
-            </div>
+<h2 class="section-title">
+📢 Latest Notices
+</h2>
 
-        </section>
+<div class="notice">
+• Mid Semester Examination Schedule Released
+</div>
 
+<div class="notice">
+• Assignment Submission Deadline Updated
+</div>
 
-        <!-- ================= PROFILE + ATTENDANCE ================= -->
+<div class="notice">
+• Tech Fest Registration Open
+</div>
 
-        <section class="top-grid">
+</div>
 
+</div>
 
-            <!-- PROFILE -->
+</div>
 
-            <div class="panel">
+<div class="glass banner">
 
-                <div class="section-title">
+<h2>
+🚀 TECH FEST 2026
+</h2>
 
-                    <h2>
-                        👤 Student Profile
-                    </h2>
+<p>
+Coding • Robotics • AI • Innovation • Student Projects
+</p>
 
-                </div>
+<a href="events.html" class="banner-btn">
+Register Now
+</a>
 
+</div>
 
-                <div class="profile">
+<h2 class="quick-title">
+⚡ Quick Access
+</h2>
 
-                    <div class="avatar">
-                        🎓
-                    </div>
+<div class="cards">
 
+<a href="attendance.html" class="card">
+<div class="icon">📊</div>
+<h3>Attendance</h3>
+<p>Track attendance & safe leaves</p>
+</a>
 
-                    <div class="profile-info">
+<a href="deadline.html" class="card">
+<div class="icon">🔔</div>
+<h3>Deadline Reminder</h3>
+<p>Manage assignments and deadlines</p>
+</a>
 
-                        <h2>
-                            Smart Campus Student
-                        </h2>
+<a href="complaint.html" class="card">
+<div class="icon">📝</div>
+<h3>Complaint Portal</h3>
+<p>Report campus issues</p>
+</a>
 
-                        <p>
-                            Student ID:
-                            <strong id="profileId">
-                                student123
-                            </strong>
-                        </p>
+<a href="lostfound.html" class="card">
+<div class="icon">🎒</div>
+<h3>Lost & Found</h3>
+<p>Report lost or found items</p>
+</a>
 
+<a href="notices.html" class="card">
+<div class="icon">📢</div>
+<h3>Notices</h3>
+<p>Latest announcements</p>
+</a>
 
-                        <div class="profile-tags">
+<a href="timetable.html" class="card">
+<div class="icon">📅</div>
+<h3>Timetable</h3>
+<p>Check class schedule</p>
+</a>
 
-                            <span class="tag">
-                                B.Tech
-                            </span>
+<a href="events.html" class="card">
+<div class="icon">🎉</div>
+<h3>Events</h3>
+<p>Campus activities and fests</p>
+</a>
 
-                            <span class="tag">
-                                Computer Science
-                            </span>
+<a href="location.html" class="card">
+<div class="icon">📍</div>
+<h3>Campus Location</h3>
+<p>Find classrooms and labs</p>
+</a>
 
-                            <span class="tag">
-                                MUIT Noida
-                            </span>
+<a href="chatbot.html" class="card">
+<div class="icon">🤖</div>
+<h3>Campus Chatbot</h3>
+<p>Ask campus-related questions</p>
+</a>
 
-                        </div>
+<a href="fees.html" class="card">
+<div class="icon">💰</div>
+<h3>Fees</h3>
+<p>Check paid and pending fees</p>
+</a>
 
-                    </div>
+<a href="profile.html" class="card">
+<div class="icon">👤</div>
+<h3>Profile</h3>
+<p>Student information</p>
+</a>
 
-                </div>
+<a href="results.html" class="card">
+<div class="icon">🏆</div>
+<h3>Results</h3>
+<p>Semester results & CGPA</p>
+</a>
 
-            </div>
+</div>
 
+</div>
 
-            <!-- ATTENDANCE -->
-
-            <div class="panel">
-
-                <div class="attendance-header">
-
-                    <h2>
-                        📊 Attendance
-                    </h2>
-
-                    <span class="percentage">
-                        82%
-                    </span>
-
-                </div>
-
-
-                <div class="progress">
-
-                    <div class="progress-bar">
-                    </div>
-
-                </div>
-
-
-                <p class="attendance-note">
-
-                    Your attendance is above the recommended
-                    level. Keep maintaining regular attendance.
-
-                </p>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- ================= QUICK ACCESS ================= -->
-
-        <div class="section-title">
-
-            <h2>
-                ⚡ Quick Access
-            </h2>
-
-        </div>
-
-
-        <section class="actions">
-
-
-            <a href="notices.html" class="action">
-
-                <div class="action-icon">
-                    📢
-                </div>
-
-                <h3>
-                    Notices
-                </h3>
-
-                <p>
-                    Latest announcements
-                </p>
-
-            </a>
-
-
-            <a href="timetable.html" class="action">
-
-                <div class="action-icon">
-                    📅
-                </div>
-
-                <h3>
-                    Timetable
-                </h3>
-
-                <p>
-                    Check your classes
-                </p>
-
-            </a>
-
-
-            <a href="events.html" class="action">
-
-                <div class="action-icon">
-                    🎉
-                </div>
-
-                <h3>
-                    Events
-                </h3>
-
-                <p>
-                    Campus activities
-                </p>
-
-            </a>
-
-
-            <a href="location.html" class="action">
-
-                <div class="action-icon">
-                    📍
-                </div>
-
-                <h3>
-                    Campus Location
-                </h3>
-
-                <p>
-                    Find important places
-                </p>
-
-            </a>
-
-
-            <!-- FEES -->
-
-            <a href="fees.html" class="action">
-
-                <div class="action-icon">
-                    💰
-                </div>
-
-                <h3>
-                    Fees & Payment
-                </h3>
-
-                <p>
-                    Check and pay fees
-                </p>
-
-            </a>
-
-
-        </section>
-
-
-        <!-- ================= DASHBOARD GRID ================= -->
-
-        <section class="dashboard-grid">
-
-
-            <!-- TODAY'S CLASSES -->
-
-            <div class="panel">
-
-                <div class="section-title">
-
-                    <h2>
-                        📚 Today's Classes
-                    </h2>
-
-                    <a href="timetable.html">
-                        Full Timetable →
-                    </a>
-
-                </div>
-
-
-                <div class="class-item">
-
-                    <div class="time">
-                        09:00 AM
-                    </div>
-
-                    <div class="class-info">
-
-                        <h3>
-                            Data Structures
-                        </h3>
-
-                        <p>
-                            Room 204 • Academic Block
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="class-item">
-
-                    <div class="time">
-                        10:00 AM
-                    </div>
-
-                    <div class="class-info">
-
-                        <h3>
-                            Database Management
-                        </h3>
-
-                        <p>
-                            Lab 102 • Computer Block
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="class-item">
-
-                    <div class="time">
-                        11:30 AM
-                    </div>
-
-                    <div class="class-info">
-
-                        <h3>
-                            Web Development
-                        </h3>
-
-                        <p>
-                            Lab 105 • Computer Block
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="class-item">
-
-                    <div class="time">
-                        02:00 PM
-                    </div>
-
-                    <div class="class-info">
-
-                        <h3>
-                            Software Engineering
-                        </h3>
-
-                        <p>
-                            Room 301 • Academic Block
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- LATEST NOTICES -->
-
-            <div class="panel">
-
-                <div class="section-title">
-
-                    <h2>
-                        📢 Latest Notices
-                    </h2>
-
-                    <a href="notices.html">
-                        View All →
-                    </a>
-
-                </div>
-
-
-                <div class="notice">
-
-                    <h3>
-                        Mid-Semester Examination
-                    </h3>
-
-                    <p>
-                        Check the latest examination schedule
-                        and important instructions.
-                    </p>
-
-                    <span class="badge">
-                        IMPORTANT
-                    </span>
-
-                </div>
-
-
-                <div class="notice">
-
-                    <h3>
-                        Assignment Submission
-                    </h3>
-
-                    <p>
-                        Submit pending assignments before
-                        the given deadline.
-                    </p>
-
-                </div>
-
-
-                <div class="notice">
-
-                    <h3>
-                        College Event Registration
-                    </h3>
-
-                    <p>
-                        Registration is open for upcoming
-                        campus events.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- ================= FEES SUMMARY ================= -->
-
-        <section class="fees-panel">
-
-            <div class="fees-header">
-
-                <div>
-
-                    <h2>
-                        💰 Fees Overview
-                    </h2>
-
-                    <p>
-                        Academic Year 2026–27
-                    </p>
-
-                </div>
-
-
-                <a href="fees.html">
-                    View Full Fees →
-                </a>
-
-            </div>
-
-
-            <div class="fees-summary">
-
-
-                <div class="fee-box">
-
-                    <p>
-                        Total Fees
-                    </p>
-
-                    <strong>
-                        ₹50,000
-                    </strong>
-
-                </div>
-
-
-                <div class="fee-box">
-
-                    <p>
-                        Paid Fees
-                    </p>
-
-                    <strong class="fee-paid">
-                        ₹30,000
-                    </strong>
-
-                </div>
-
-
-                <div class="fee-box">
-
-                    <p>
-                        Remaining Fees
-                    </p>
-
-                    <strong class="fee-remaining">
-                        ₹20,000
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="fee-progress">
-
-                <div class="fee-progress-bar">
-                </div>
-
-            </div>
-
-
-            <p class="fee-note">
-                60% fees paid • Due date: 30 September 2026
-            </p>
-
-        </section>
-
-
-        <!-- ================= EVENT ================= -->
-
-        <section class="event-banner">
-
-            <div>
-
-                <h2>
-                    ⭐ Tech Fest 2026
-                </h2>
-
-                <p>
-                    Coding • Robotics • Innovation • Student Projects
-                </p>
-
-            </div>
-
-
-            <a href="events.html" class="event-btn">
-                Explore Events →
-            </a>
-
-        </section>
-
-
-    </main>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <strong>
-            🎓 Smart Campus Assistant
-        </strong>
-
-        <br><br>
-
-        MUIT Noida | Your Digital Campus Companion
-
-        <br><br>
-
-        © 2026 Smart Campus Assistant |
-        Designed for Students
-
-    </footer>
-
-
-    <!-- ================= JAVASCRIPT ================= -->
-
-    <script>
-
-        /* ================= STUDENT DATA ================= */
-
-        const savedStudentId =
-            localStorage.getItem("studentId");
-
-
-        if (savedStudentId) {
-
-            document.getElementById(
-                "studentId"
-            ).innerText =
-                savedStudentId;
-
-
-            document.getElementById(
-                "profileId"
-            ).innerText =
-                savedStudentId;
-
-
-            document.getElementById(
-                "welcomeName"
-            ).innerText =
-                savedStudentId;
-
-        }
-
-
-        /* ================= LOGOUT ================= */
-
-        function logoutStudent() {
-
-            localStorage.removeItem(
-                "studentLoggedIn"
-            );
-
-            localStorage.removeItem(
-                "studentId"
-            );
-
-            window.location.replace(
-                "login.html"
-            );
-
-        }
-
-    </script>
-
+<footer>
+✨ Smart Campus Assistant © 2026 | Built with ❤️
+</footer>
 
 </body>
-
 </html>
-```

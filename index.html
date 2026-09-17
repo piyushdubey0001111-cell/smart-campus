@@ -1,43 +1,73 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Campus Assistant | MUIT Noida</title>
+
+<title>Smart Campus Assistant</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-:root{
---bg:#f4f7fb;
---card:#ffffff;
---text:#0f172a;
---muted:#64748b;
---primary:#2563eb;
---border:#e2e8f0;
-}
-
-body.dark{
---bg:#0f172a;
---card:#1e293b;
---text:#f8fafc;
---muted:#94a3b8;
---primary:#60a5fa;
---border:#334155;
-}
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+:root{
+--bg:#070b14;
+--card:rgba(255,255,255,.08);
+--border:rgba(255,255,255,.12);
+--text:#ffffff;
+--muted:#9ca3af;
+--blue:#3b82f6;
+--purple:#8b5cf6;
+--cyan:#06b6d4;
 }
 
 body{
-font-family:"Segoe UI",Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
-transition:.3s;
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
+
+/* Animated Background */
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 10% 20%,rgba(59,130,246,.35),transparent 25%),
+radial-gradient(circle at 80% 30%,rgba(139,92,246,.25),transparent 25%),
+radial-gradient(circle at 60% 80%,rgba(6,182,212,.25),transparent 25%);
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(
+135deg,
+#050816,
+#0f172a,
+#111827,
+#050816
+);
+background-size:400% 400%;
+animation:bgMove 15s ease infinite;
+opacity:.95;
+z-index:-3;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 /* NAVBAR */
@@ -46,591 +76,449 @@ nav{
 position:sticky;
 top:0;
 z-index:1000;
-padding:15px 6%;
 display:flex;
-align-items:center;
 justify-content:space-between;
-background:rgba(255,255,255,.92);
-backdrop-filter:blur(15px);
+align-items:center;
+padding:20px 8%;
+backdrop-filter:blur(20px);
+background:rgba(10,15,30,.65);
 border-bottom:1px solid var(--border);
 }
 
-body.dark nav{
-background:rgba(15,23,42,.92);
-}
-
 .logo{
-color:var(--primary);
-text-decoration:none;
-font-size:21px;
+font-size:28px;
 font-weight:800;
+background:linear-gradient(90deg,#60a5fa,#a78bfa);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .nav-links{
 display:flex;
+gap:22px;
 align-items:center;
-gap:18px;
 flex-wrap:wrap;
 }
 
 .nav-links a{
-color:var(--muted);
 text-decoration:none;
-font-size:13px;
-font-weight:700;
+color:white;
+font-size:14px;
+font-weight:600;
+transition:.3s;
 }
 
 .nav-links a:hover{
-color:var(--primary);
-}
-
-.theme-btn{
-width:38px;
-height:38px;
-border-radius:50%;
-border:1px solid var(--border);
-background:var(--card);
-cursor:pointer;
-font-size:18px;
+color:#60a5fa;
 }
 
 .login-btn{
-background:var(--primary);
-color:white!important;
-padding:9px 14px;
-border-radius:8px;
+padding:11px 18px;
+border-radius:12px;
+background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
 
 /* HERO */
 
 .hero{
-min-height:590px;
+min-height:90vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:70px 20px;
-color:white;
-background:
-radial-gradient(circle at 15% 20%,rgba(96,165,250,.45),transparent 30%),
-radial-gradient(circle at 85% 80%,rgba(129,140,248,.35),transparent 30%),
-linear-gradient(135deg,#172554,#1d4ed8,#2563eb);
+padding:100px 20px;
 }
 
 .hero-content{
-max-width:850px;
+max-width:950px;
 }
 
 .badge{
 display:inline-block;
-padding:8px 15px;
-border-radius:30px;
-background:rgba(255,255,255,.13);
-border:1px solid rgba(255,255,255,.22);
-font-size:12px;
-font-weight:700;
-margin-bottom:20px;
-}
-
-.hero h1{
-font-size:56px;
-margin-bottom:18px;
-}
-
-.hero h1 span{
-color:#bfdbfe;
-}
-
-.hero p{
-max-width:680px;
-margin:auto;
-font-size:17px;
-line-height:1.7;
-}
-
-.hero-buttons{
-display:flex;
-justify-content:center;
-gap:14px;
-flex-wrap:wrap;
-margin-top:30px;
-}
-
-.hero-btn{
-padding:13px 23px;
-border-radius:10px;
-text-decoration:none;
-font-weight:800;
+padding:10px 18px;
+border-radius:50px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.15);
+margin-bottom:25px;
 font-size:13px;
 }
 
-.primary-btn{
+.hero h1{
+font-size:72px;
+font-weight:800;
+line-height:1.1;
+margin-bottom:20px;
+}
+
+.hero h1 span{
+background:linear-gradient(
+90deg,
+#60a5fa,
+#8b5cf6,
+#06b6d4
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+max-width:760px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+color:#cbd5e1;
+}
+
+.hero-buttons{
+margin-top:35px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 24px;
+border-radius:14px;
+text-decoration:none;
+font-weight:700;
+transition:.3s;
+}
+
+.btn-primary{
 background:white;
-color:#1e3a8a;
+color:#111827;
 }
 
-.secondary-btn{
-background:rgba(255,255,255,.12);
+.btn-secondary{
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.06);
 color:white;
-border:1px solid rgba(255,255,255,.3);
 }
 
-/* CONTENT */
+/* CONTAINER */
 
 .container{
-max-width:1150px;
+max-width:1300px;
 margin:auto;
-padding:70px 20px;
+padding:80px 20px;
 }
 
 .section-title{
 text-align:center;
-margin-bottom:40px;
+margin-bottom:50px;
 }
 
 .section-title h2{
-font-size:32px;
-margin-bottom:8px;
+font-size:42px;
+margin-bottom:10px;
 }
 
 .section-title p{
-color:var(--muted);
+color:#94a3b8;
 }
+/* FEATURE GRID */
 
-.features{
+.grid{
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
 .card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;
-padding:30px 22px;
-text-align:center;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(18px);
+border-radius:24px;
+padding:30px;
 text-decoration:none;
-color:inherit;
-box-shadow:0 10px 30px rgba(15,23,42,.08);
-transition:.3s;
+color:white;
+transition:.35s;
+overflow:hidden;
+position:relative;
 }
 
 .card:hover{
-transform:translateY(-8px);
-border-color:var(--primary);
+transform:translateY(-10px);
+border-color:#60a5fa;
+box-shadow:0 15px 40px rgba(59,130,246,.25);
 }
 
-.icon{
-width:65px;
-height:65px;
-margin:auto auto 17px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:18px;
-background:#dbeafe;
-font-size:32px;
+.card::before{
+content:"";
+position:absolute;
+width:120px;
+height:120px;
+background:rgba(255,255,255,.05);
+border-radius:50%;
+top:-50px;
+right:-50px;
+}
+
+.card-icon{
+font-size:48px;
+margin-bottom:15px;
 }
 
 .card h3{
-color:var(--primary);
-margin-bottom:8px;
-font-size:18px;
+font-size:22px;
+margin-bottom:10px;
 }
 
 .card p{
-color:var(--muted);
-font-size:13px;
-line-height:1.6;
+color:#cbd5e1;
+font-size:14px;
+line-height:1.7;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.stat-card{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.12);
+border-radius:24px;
+padding:35px;
+text-align:center;
+backdrop-filter:blur(15px);
+}
+
+.stat-card h3{
+font-size:40px;
+background:linear-gradient(
+90deg,
+#60a5fa,
+#8b5cf6
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:8px;
+}
+
+.stat-card p{
+color:#cbd5e1;
 }
 
 /* REMINDER */
 
-.reminder-section{
-margin-top:45px;
-background:var(--card);
-border:1px solid var(--border);
-border-radius:22px;
-padding:35px;
+.glass-card{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(20px);
+border-radius:30px;
+padding:40px;
+margin-top:60px;
 }
 
-.reminder-header{
-text-align:center;
-margin-bottom:28px;
-}
-
-.reminder-header h2{
-font-size:28px;
-margin-bottom:8px;
-}
-
-.reminder-header p{
-color:var(--muted);
-font-size:14px;
-}
-
-.reminder-form{
+#reminderForm{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-max-width:850px;
-margin:auto;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-top:25px;
 }
 
-.form-group{
-display:flex;
-flex-direction:column;
-gap:7px;
-}
-
-.form-group.full{
-grid-column:1/-1;
-}
-
-.form-group label{
-font-size:13px;
-font-weight:700;
-}
-
-.form-group input,
-.form-group textarea{
-width:100%;
-padding:12px 14px;
-border:1px solid var(--border);
-border-radius:9px;
-background:var(--bg);
-color:var(--text);
-font-family:inherit;
-outline:none;
-}
-
-.form-group textarea{
-min-height:90px;
-resize:vertical;
-}
-
-.reminder-btn{
-grid-column:1/-1;
-border:none;
+#reminderForm input{
 padding:14px;
-border-radius:10px;
-background:var(--primary);
-color:white;
-font-weight:800;
-cursor:pointer;
-}
-
-.reminder-list{
-max-width:850px;
-margin:30px auto 0;
-}
-
-.reminder-item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:16px;
-margin-bottom:12px;
-background:var(--bg);
-border:1px solid var(--border);
-border-radius:12px;
-}
-
-.reminder-info strong{
-display:block;
-margin-bottom:5px;
-}
-
-.reminder-info span{
-color:var(--muted);
-font-size:12px;
-}
-
-.delete-btn{
 border:none;
-background:#fee2e2;
-color:#dc2626;
-padding:8px 11px;
-border-radius:7px;
-cursor:pointer;
-font-weight:700;
-}
-
-/* LOGIN */
-
-.login-section{
-margin-top:45px;
-padding:45px 30px;
-border-radius:22px;
-text-align:center;
-background:linear-gradient(135deg,#1e3a8a,#2563eb);
+outline:none;
+border-radius:14px;
+background:rgba(255,255,255,.08);
 color:white;
 }
 
-.login-section h2{
-font-size:28px;
-margin-bottom:8px;
+#reminderForm button{
+padding:14px;
+border:none;
+border-radius:14px;
+background:linear-gradient(
+135deg,
+#2563eb,
+#7c3aed
+);
+color:white;
+font-weight:700;
+cursor:pointer;
 }
 
-.login-section p{
-margin-bottom:22px;
+.reminder-card{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);
+padding:20px;
+border-radius:18px;
+margin-top:15px;
 }
 
-.login-section a{
-display:inline-block;
-background:white;
-color:#1e3a8a;
-padding:13px 25px;
-border-radius:9px;
-text-decoration:none;
-font-weight:800;
+.reminder-card button{
+margin-top:10px;
+background:#ef4444;
+border:none;
+padding:10px 14px;
+border-radius:10px;
+color:white;
+cursor:pointer;
 }
 
 /* FOOTER */
 
 footer{
-background:#0b1120;
-color:#94a3b8;
+margin-top:80px;
+padding:50px 20px;
 text-align:center;
-padding:30px 20px;
-font-size:13px;
+background:rgba(0,0,0,.25);
+border-top:1px solid rgba(255,255,255,.08);
 }
 
-/* ================= CHATBOT ================= */
+.footer-links{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin:20px 0;
+}
 
-.chatbot-widget{
+.footer-links a{
+color:#cbd5e1;
+text-decoration:none;
+}
+
+.copyright{
+margin-top:15px;
+color:#94a3b8;
+}
+
+/* CHATBOT */
+
+.chatbot{
 position:fixed;
-right:22px;
-bottom:22px;
+bottom:25px;
+right:25px;
 z-index:9999;
 }
 
-.chatbot-button{
-width:60px;
-height:60px;
+#chatBtn{
+width:70px;
+height:70px;
 border:none;
 border-radius:50%;
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-color:white;
-font-size:27px;
+font-size:28px;
 cursor:pointer;
-box-shadow:0 8px 25px rgba(37,99,235,.4);
+background:linear-gradient(
+135deg,
+#2563eb,
+#7c3aed
+);
+color:white;
+box-shadow:0 10px 30px rgba(59,130,246,.4);
 }
 
-.chatbot-window{
+.chat-box{
 position:absolute;
+bottom:90px;
 right:0;
-bottom:72px;
 width:340px;
 height:450px;
-background:var(--card);
-border:1px solid var(--border);
-border-radius:18px;
-box-shadow:0 15px 45px rgba(0,0,0,.25);
-overflow:hidden;
+background:#0f172a;
+border:1px solid rgba(255,255,255,.12);
+border-radius:24px;
 display:none;
-flex-direction:column;
+overflow:hidden;
 }
 
-.chatbot-window.active{
-display:flex;
+.chat-box.show{
+display:block;
 }
 
 .chat-header{
-padding:14px 16px;
-background:linear-gradient(135deg,#1e3a8a,#2563eb);
-color:white;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.chat-header-left{
-display:flex;
-align-items:center;
-gap:9px;
-}
-
-.bot-avatar{
-width:38px;
-height:38px;
-border-radius:50%;
-background:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
-}
-
-.chat-header h3{
-font-size:14px;
-}
-
-.chat-status{
-font-size:10px;
-opacity:.85;
-}
-
-.close-chat{
-border:none;
-background:none;
-color:white;
-font-size:22px;
-cursor:pointer;
+padding:15px;
+font-weight:700;
+background:#1e293b;
 }
 
 .chat-messages{
-flex:1;
-padding:14px;
+height:320px;
 overflow-y:auto;
-background:var(--bg);
+padding:15px;
 }
 
-.chat-message{
-max-width:82%;
-padding:10px 12px;
+.bot-msg,
+.user-msg{
+padding:12px;
+border-radius:14px;
 margin-bottom:10px;
-border-radius:13px;
-font-size:12px;
-line-height:1.5;
 }
 
-.bot-message{
-background:var(--card);
-color:var(--text);
-border:1px solid var(--border);
+.bot-msg{
+background:#1e293b;
 }
 
-.user-message{
-margin-left:auto;
-background:var(--primary);
-color:white;
-}
-
-.quick-questions{
-display:flex;
-gap:5px;
-flex-wrap:wrap;
-padding:8px;
-background:var(--card);
-border-top:1px solid var(--border);
-}
-
-.quick-btn{
-border:1px solid var(--border);
-background:var(--bg);
-color:var(--text);
-padding:6px 8px;
-border-radius:20px;
-font-size:10px;
-cursor:pointer;
-}
-
-.chat-input-area{
-display:flex;
-gap:7px;
-padding:9px;
-background:var(--card);
-border-top:1px solid var(--border);
+.user-msg{
+background:#2563eb;
+text-align:right;
 }
 
 .chat-input{
-flex:1;
-min-width:0;
-border:1px solid var(--border);
-background:var(--bg);
-color:var(--text);
+display:flex;
 padding:10px;
-border-radius:9px;
-outline:none;
+gap:10px;
 }
 
-.send-chat{
-width:40px;
+.chat-input input{
+flex:1;
+padding:12px;
 border:none;
-border-radius:9px;
-background:var(--primary);
+outline:none;
+border-radius:12px;
+background:#1e293b;
+color:white;
+}
+
+.chat-input button{
+width:50px;
+border:none;
+border-radius:12px;
+background:#2563eb;
 color:white;
 cursor:pointer;
 }
 
-/* MOBILE */
-
-@media(max-width:950px){
-
-.features{
-grid-template-columns:repeat(2,1fr);
-}
+@media(max-width:768px){
 
 .hero h1{
-font-size:45px;
+font-size:48px;
 }
-
-}
-
-@media(max-width:650px){
 
 nav{
 flex-direction:column;
-gap:13px;
+gap:15px;
 }
 
-.nav-links{
-justify-content:center;
-}
-
-.hero h1{
-font-size:36px;
-}
-
-.features{
-grid-template-columns:1fr;
-}
-
-.reminder-form{
-grid-template-columns:1fr;
-}
-
-.form-group.full,
-.reminder-btn{
-grid-column:auto;
-}
-
-.chatbot-widget{
-right:15px;
-bottom:15px;
-}
-
-.chatbot-window{
-right:-5px;
-width:calc(100vw - 30px);
-height:440px;
+.chat-box{
+width:300px;
 }
 
 }
 
 </style>
-
 </head>
-
-<body>
-
-<!-- NAVBAR -->
+<body><!-- NAVBAR -->
 
 <nav>
 
-<a href="index.html" class="logo">
-🎓 Smart Campus
-</a>
+<div class="logo">🎓 Smart Campus</div>
 
 <div class="nav-links">
-
-<a href="index.html">Home</a> <a href="notices.html">📢 Notices</a> <a href="timetable.html">📅 Timetable</a> <a href="events.html">🎉 Events</a> <a href="location.html">📍 Location</a> <a href="fees.html">💰 Fees</a> <a href="#reminder">⏰ Reminder</a> <a href="login.html" class="login-btn">🔐 Student Login</a>
-
-<button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
-🌙
-</button>
-
+<a href="index.html">Home</a>
+<a href="attendance.html">Attendance</a>
+<a href="deadline.html">Deadlines</a>
+<a href="notices.html">Notices</a>
+<a href="events.html">Events</a>
+<a href="login.html" class="login-btn">Login</a>
 </div>
 
 </nav>
@@ -642,750 +530,218 @@ height:440px;
 <div class="hero-content">
 
 <div class="badge">
-🎓 MUIT Noida • Smart Campus Portal
+🚀 Apple + Gen-Z Smart Campus Experience
 </div>
 
 <h1>
-Welcome to <span>Smart Campus</span>
+Welcome to
+<span>Smart Campus</span>
 </h1>
 
 <p>
-Your digital campus companion for college notices,
-class timetable, events, classroom locations,
-fees and student services — all in one place.
+Your all-in-one student platform for Attendance, Deadlines,
+Results, Notices, Fees, Lost & Found, Complaints,
+Campus Navigation and much more.
 </p>
 
 <div class="hero-buttons">
-
-<a href="login.html" class="hero-btn primary-btn">
-🔐 Student Login →
+<a href="login.html" class="btn btn-primary">
+Student Login
 </a>
 
-<a href="#features" class="hero-btn secondary-btn">
-Explore Campus ↓
+<a href="dashboard.html" class="btn btn-secondary">
+Open Dashboard
 </a>
-
 </div>
 
 </div>
 
 </section>
 
-<!-- FEATURES -->
-
-<main class="container" id="features">
+<div class="container">
 
 <div class="section-title">
-
-<h2>Everything You Need 🎯</h2>
-
-<p>Access important campus information quickly</p>
-
+<h2>✨ Smart Campus Services</h2>
+<p>Everything a student needs in one place.</p>
 </div>
 
-<section class="features">
+<div class="grid">
 
-<a href="notices.html" class="card">
-
-<div class="icon">📢</div>
-
-<h3>College Notices</h3>
-
-<p>
-Read the latest college announcements,
-academic updates and important notices.
-</p>
-
+<a href="attendance.html" class="card">
+<div class="card-icon">📊</div>
+<h3>Attendance</h3>
+<p>Track attendance and calculate safe leaves.</p>
 </a>
 
-<a href="timetable.html" class="card">
+<a href="deadline.html" class="card">
+<div class="card-icon">⏰</div>
+<h3>Deadlines</h3>
+<p>Assignments, exams and submissions.</p>
+</a>
 
-<div class="icon">📅</div>
-
-<h3>Class Timetable</h3>
-
-<p>
-Quickly check your daily classes,
-timings, rooms and subjects.
-</p>
-
+<a href="notices.html" class="card">
+<div class="card-icon">📢</div>
+<h3>Notices</h3>
+<p>Latest college announcements.</p>
 </a>
 
 <a href="events.html" class="card">
-
-<div class="icon">🎉</div>
-
-<h3>Campus Events</h3>
-
-<p>
-Discover festivals, seminars,
-competitions and student activities.
-</p>
-
-</a>
-
-<a href="location.html" class="card">
-
-<div class="icon">📍</div>
-
-<h3>Campus Location</h3>
-
-<p>
-Find classrooms, academic blocks,
-library and other important locations.
-</p>
-
+<div class="card-icon">🎉</div>
+<h3>Events</h3>
+<p>Campus activities and registrations.</p>
 </a>
 
 <a href="fees.html" class="card">
-
-<div class="icon">💰</div>
-
-<h3>Fees & Payment</h3>
-
-<p>
-Check total fees, paid fees,
-remaining balance and payment due date.
-</p>
-
+<div class="card-icon">💰</div>
+<h3>Fees</h3>
+<p>Check paid and remaining fees.</p>
 </a>
 
-<a href="#reminder" class="card">
-
-<div class="icon">⏰</div>
-
-<h3>Smart Reminder</h3>
-
-<p>
-Set reminders for classes, exams,
-events and assignments.
-</p>
-
+<a href="results.html" class="card">
+<div class="card-icon">🏆</div>
+<h3>Results</h3>
+<p>Semester results and CGPA.</p>
 </a>
 
-</section>
-
-<!-- REMINDER -->
-
-<section class="reminder-section" id="reminder">
-
-<div class="reminder-header">
-
-<h2>⏰ Smart Reminder</h2>
-
-<p>
-Never miss an important class, exam, event or assignment.
-</p>
-
-</div>
-
-<form class="reminder-form" onsubmit="addReminder(event)">
-
-<div class="form-group">
-
-<label>Reminder Title</label>
-
-<input
-type="text"
-id="reminderTitle"
-placeholder="e.g. Mathematics Class"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Date</label>
-
-<input
-type="date"
-id="reminderDate"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Time</label>
-
-<input
-type="time"
-id="reminderTime"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Reminder Type</label>
-
-<input
-type="text"
-id="reminderType"
-placeholder="e.g. Class / Exam / Event">
-
-</div>
-
-<div class="form-group full">
-
-<label>Message</label>
-
-<textarea
-id="reminderMessage"
-placeholder="Write your reminder message..."></textarea>
-
-</div>
-
-<button type="submit" class="reminder-btn">
-➕ Add Reminder
-</button>
-
-</form>
-
-<div class="reminder-list">
-
-<h3>Your Reminders</h3>
-
-<div id="reminderList"></div>
-
-</div>
-
-</section>
-
-<!-- LOGIN -->
-
-<section class="login-section">
-
-<h2>Ready to enter your campus? 🚀</h2>
-
-<p>
-Login as a student to access your personalized dashboard.
-</p>
-
-<a href="login.html">
-🔐 Login to Student Dashboard
+<a href="lostfound.html" class="card">
+<div class="card-icon">🎒</div>
+<h3>Lost & Found</h3>
+<p>Report lost and found items.</p>
 </a>
 
-</section>
+<a href="complaint.html" class="card">
+<div class="card-icon">📝</div>
+<h3>Complaint Portal</h3>
+<p>Submit campus complaints.</p>
+</a>
 
-</main>
+<a href="location.html" class="card">
+<div class="card-icon">📍</div>
+<h3>Campus Navigation</h3>
+<p>Find classrooms and labs.</p>
+</a>
 
-<!-- FOOTER -->
+<a href="profile.html" class="card">
+<div class="card-icon">👤</div>
+<h3>Profile</h3>
+<p>Student information dashboard.</p>
+</a>
+
+<a href="chatbot.html" class="card">
+<div class="card-icon">🤖</div>
+<h3>AI Assistant</h3>
+<p>Instant campus support.</p>
+</a>
+
+<a href="dashboard.html" class="card">
+<div class="card-icon">🚀</div>
+<h3>Dashboard</h3>
+<p>Premium student dashboard.</p>
+</a>
+
+</div>
+
+<div class="section-title" style="margin-top:80px;">
+<h2>📈 Campus Snapshot</h2>
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+<h3>5000+</h3>
+<p>Students</p>
+</div>
+
+<div class="stat-card">
+<h3>150+</h3>
+<p>Faculty</p>
+</div>
+
+<div class="stat-card">
+<h3>50+</h3>
+<p>Labs</p>
+</div>
+
+<div class="stat-card">
+<h3>100+</h3>
+<p>Events</p>
+</div>
+
+</div>
 
 <footer>
 
-<strong>🎓 Smart Campus Assistant</strong>
+<h2>🎓 Smart Campus</h2>
 
-<br><br>
+<div class="footer-links">
+<a href="attendance.html">Attendance</a>
+<a href="deadline.html">Deadlines</a>
+<a href="fees.html">Fees</a>
+<a href="results.html">Results</a>
+</div>
 
-MUIT Noida | Your Digital Campus Companion
-
-<br><br>
-
+<p class="copyright">
 © 2026 Smart Campus Assistant
+</p>
 
 </footer>
 
-<!-- ================= CHATBOT ================= -->
+</div>
 
-<div class="chatbot-widget">
+<!-- CHATBOT -->
 
-<div class="chatbot-window" id="chatbotWindow">
+<div class="chatbot">
+
+<button id="chatBtn">🤖</button>
+
+<div class="chat-box" id="chatBox">
 
 <div class="chat-header">
-
-<div class="chat-header-left">
-
-<div class="bot-avatar">🤖</div>
-
-<div>
-
-<h3>Smart Campus Bot</h3>
-
-<div class="chat-status">
-● Online • Campus Assistant
-</div>
-
-</div>
-
-</div>
-
-<button class="close-chat" onclick="toggleChat()">×</button>
-
+Smart Campus AI
 </div>
 
 <div class="chat-messages" id="chatMessages">
+<div class="bot-msg">
+👋 Hello Student! How can I help you?
+</div>
+</div>
 
-<div class="chat-message bot-message">
-
-👋 <b>Hello!</b><br><br>
-
-I'm your Smart Campus Assistant.
-Ask me about notices, timetable,
-events, fees, classrooms or reminders.
-
+<div class="chat-input">
+<input type="text" id="userInput" placeholder="Ask something...">
+<button onclick="sendMessage()">➤</button>
 </div>
 
 </div>
-
-<div class="quick-questions">
-
-<button class="quick-btn"
-onclick="quickQuestion('What are the latest notices?')">
-📢 Notices </button>
-
-<button class="quick-btn"
-onclick="quickQuestion('Where can I see my timetable?')">
-📅 Timetable </button>
-
-<button class="quick-btn"
-onclick="quickQuestion('What campus events are available?')">
-🎉 Events </button>
-
-<button class="quick-btn"
-onclick="quickQuestion('Where can I find classrooms?')">
-📍 Location </button>
-
-</div>
-
-<div class="chat-input-area">
-
-<input
-type="text"
-class="chat-input"
-id="chatInput"
-placeholder="Ask something..."
-onkeydown="handleChatEnter(event)">
-
-<button class="send-chat" onclick="sendChatMessage()">
-➤
-</button>
-
-</div>
-
-</div>
-
-<button
-class="chatbot-button"
-onclick="toggleChat()"
-title="Open Smart Campus Assistant">
-
-🤖
-
-</button>
 
 </div>
 
 <script>
 
-/* THEME */
+const chatBtn=document.getElementById("chatBtn");
+const chatBox=document.getElementById("chatBox");
 
-function toggleTheme(){
-
-document.body.classList.toggle("dark");
-
-const isDark =
-document.body.classList.contains("dark");
-
-localStorage.setItem(
-"smartCampusTheme",
-isDark ? "dark" : "light"
-);
-
-document.getElementById("themeBtn").innerText =
-isDark ? "☀️" : "🌙";
-
+chatBtn.onclick=()=>{
+chatBox.classList.toggle("show");
 }
 
-if(localStorage.getItem("smartCampusTheme")==="dark"){
+function sendMessage(){
 
-document.body.classList.add("dark");
+const input=document.getElementById("userInput");
+const msg=input.value.trim();
 
-document.getElementById("themeBtn").innerText="☀️";
+if(msg==="") return;
 
-}
+const messages=document.getElementById("chatMessages");
 
+messages.innerHTML+=
+`<div class="user-msg">${msg}</div>`;
 
-/* REMINDER */
+messages.innerHTML+=
+`<div class="bot-msg">Open the relevant page from Smart Campus.</div>`;
 
-let reminders =
-JSON.parse(
-localStorage.getItem("smartCampusReminders")
-) || [];
-
-
-function saveReminders(){
-
-localStorage.setItem(
-"smartCampusReminders",
-JSON.stringify(reminders)
-);
-
-}
-
-
-function addReminder(event){
-
-event.preventDefault();
-
-const reminder={
-
-id:Date.now(),
-
-title:document.getElementById("reminderTitle").value,
-
-date:document.getElementById("reminderDate").value,
-
-time:document.getElementById("reminderTime").value,
-
-type:
-document.getElementById("reminderType").value ||
-"General",
-
-message:
-document.getElementById("reminderMessage").value
-
-};
-
-reminders.push(reminder);
-
-saveReminders();
-
-displayReminders();
-
-event.target.reset();
-
-alert("✅ Reminder added successfully!");
-
-}
-
-
-function deleteReminder(id){
-
-reminders=reminders.filter(function(item){
-
-return item.id!==id;
-
-});
-
-saveReminders();
-
-displayReminders();
-
-}
-
-
-function displayReminders(){
-
-const list=
-document.getElementById("reminderList");
-
-if(reminders.length===0){
-
-list.innerHTML=
-'<div style="color:var(--muted);text-align:center;padding:15px;">No reminders added yet.</div>';
-
-return;
-
-}
-
-list.innerHTML="";
-
-reminders.forEach(function(reminder){
-
-const item=document.createElement("div");
-
-item.className="reminder-item";
-
-item.innerHTML=`
-
-<div class="reminder-info">
-
-<strong>⏰ ${reminder.title}</strong>
-
-<span>
-${reminder.date} • ${reminder.time} • ${reminder.type}
-</span>
-
-</div>
-
-<button class="delete-btn"
-onclick="deleteReminder(${reminder.id})">
-Delete
-</button>
-
-`;
-
-list.appendChild(item);
-
-});
-
-}
-
-displayReminders();
-
-
-/* CHATBOT */
-
-function toggleChat(){
-
-const chat=
-document.getElementById("chatbotWindow");
-
-chat.classList.toggle("active");
-
-if(chat.classList.contains("active")){
-
-document.getElementById("chatInput").focus();
-
-}
-
-}
-
-
-function addChatMessage(message,type){
-
-const box=
-document.getElementById("chatMessages");
-
-const div=
-document.createElement("div");
-
-div.className=
-"chat-message "+
-(type==="user" ? "user-message" : "bot-message");
-
-div.innerHTML=message;
-
-box.appendChild(div);
-
-box.scrollTop=box.scrollHeight;
-
-}
-
-
-function escapeHTML(text){
-
-const div=document.createElement("div");
-
-div.textContent=text;
-
-return div.innerHTML;
-
-}
-
-
-function sendChatMessage(){
-
-const input=
-document.getElementById("chatInput");
-
-const message=
-input.value.trim();
-
-if(!message)return;
-
-addChatMessage(
-escapeHTML(message),
-"user"
-);
+messages.scrollTop=messages.scrollHeight;
 
 input.value="";
-
-setTimeout(function(){
-
-addChatMessage(
-getBotReply(message),
-"bot"
-);
-
-},400);
-
-}
-
-
-function quickQuestion(question){
-
-document.getElementById("chatInput").value=question;
-
-sendChatMessage();
-
-}
-
-
-function handleChatEnter(event){
-
-if(event.key==="Enter"){
-
-sendChatMessage();
-
-}
-
-}
-
-
-function getBotReply(message){
-
-const text=message.toLowerCase();
-
-
-if(
-text.includes("hello")||
-text.includes("hi")||
-text.includes("hey")||
-text.includes("namaste")
-){
-
-return `
-👋 Hello! Welcome to
-<b>Smart Campus Assistant</b>.<br><br>
-How can I help you?
-`;
-
-}
-
-
-if(
-text.includes("notice")||
-text.includes("announcement")
-){
-
-return `
-📢 Latest notices ke liye
-<a href="notices.html"
-style="color:#2563eb;font-weight:bold;">
-Notices page
-</a>
-open karo.
-`;
-
-}
-
-
-if(
-text.includes("timetable")||
-text.includes("schedule")||
-text.includes("class")
-){
-
-return `
-📅 Class schedule dekhne ke liye
-<a href="timetable.html"
-style="color:#2563eb;font-weight:bold;">
-Timetable page
-</a>
-open karo.
-`;
-
-}
-
-
-if(
-text.includes("event")||
-text.includes("festival")||
-text.includes("program")
-){
-
-return `
-🎉 College events dekhne ke liye
-<a href="events.html"
-style="color:#2563eb;font-weight:bold;">
-Events page
-</a>
-open karo.
-`;
-
-}
-
-
-if(
-text.includes("location")||
-text.includes("classroom")||
-text.includes("room")||
-text.includes("library")
-){
-
-return `
-📍 Classroom aur campus location ke liye
-<a href="location.html"
-style="color:#2563eb;font-weight:bold;">
-Location page
-</a>
-open karo.
-`;
-
-}
-
-
-if(
-text.includes("fee")||
-text.includes("payment")
-){
-
-return `
-💰 Fees information ke liye
-<a href="fees.html"
-style="color:#2563eb;font-weight:bold;">
-Fees & Payment
-</a>
-page open karo.
-`;
-
-}
-
-
-if(
-text.includes("reminder")||
-text.includes("assignment")||
-text.includes("exam")
-){
-
-return `
-⏰ Reminder banane ke liye
-Home page ke <b>Smart Reminder</b>
-section ka use karo.
-`;
-
-}
-
-
-if(
-text.includes("login")||
-text.includes("dashboard")
-){
-
-return `
-🔐 Student dashboard ke liye
-<a href="login.html"
-style="color:#2563eb;font-weight:bold;">
-Student Login
-</a>
-open karo.
-`;
-
-}
-
-
-if(
-text.includes("thank")||
-text.includes("thanks")
-){
-
-return "😊 You're welcome!";
-
-}
-
-
-return `
-🤖 Main in cheezon mein help kar sakta hoon:<br><br>
-📢 Notices<br>
-📅 Timetable<br>
-🎉 Events<br>
-📍 Location<br>
-💰 Fees<br>
-⏰ Reminders
-`;
-
 }
 
 </script>
